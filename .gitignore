@@ -1,0 +1,6 @@
+# Ignore virtualenv environment
+/env
+.venv
+
+# Don't include any JJB personal configuration
+**/jenkins_jobs.ini

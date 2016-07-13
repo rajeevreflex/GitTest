@@ -1,0 +1,12 @@
+---
+#### This file contains the build pipelines for the various projects.
+
+# You should create one project per product and link all the steps
+
+- project:
+    name: ESIM
+    node: esim-buildslave01
+    jobs:
+      - '{name}-terraform-validate'
+      # - '{name}-terraform-build'
+      # - '{name}-terraform-destroy'
