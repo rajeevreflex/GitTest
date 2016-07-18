@@ -10,31 +10,14 @@
       - git:
           url: 'ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git'
           credentials-id: '9a12b119-5a82-4998-b102-f361ac3a2269'
-          refspec: '+refs/pull-requests/*:refs/remotes/origin/pr/*'
           branches:
-            - 'origin/pr/${{pullRequestId}}/from'
+            - '*/master'
           skip-tag: true
           timeout: 5
     triggers:
-      - raw:
-          xml: |
-            <stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger plugin="stash-pullrequest-builder@1.5.3">
-              <spec>* * * * *</spec>
-              <cron>* * * * *</cron>
-              <stashHost>https://platform.devops.vodafone.com/stash</stashHost>
-              <credentialsId>6462b05c-7217-4336-acb3-01ac292e4149</credentialsId>
-              <projectCode>VFLEAP</projectCode>
-              <repositoryName>vfdo-esim-platform</repositoryName>
-              <ciSkipPhrases>NO TEST</ciSkipPhrases>
-              <ciBuildPhrases>test this please</ciBuildPhrases>
-              <targetBranchesToBuild/>
-              <ignoreSsl>true</ignoreSsl>
-              <checkDestinationCommit>false</checkDestinationCommit>
-              <checkMergeable>false</checkMergeable>
-              <checkNotConflicted>false</checkNotConflicted>
-              <onlyBuildOnComment>false</onlyBuildOnComment>
-              <deletePreviousBuildFinishComments>false</deletePreviousBuildFinishComments>
-            </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
+      - pollscm:
+          cron: "*/10 * * * *"
+          ignore-post-commit-hooks: True
     node: '{node}'
     builders:
       - shell:
@@ -42,3 +25,52 @@
     publishers:
       - junit:
           results: 'report.xml'
+
+# Job would use stash-pullrequest-builder but until the plugin has been updated
+# it is not currently compatible with Jenkins2 15.07.2016
+# https://wiki.jenkins-ci.org/display/JENKINS/Stash+pullrequest+builder+plugin
+# https://issues.jenkins-ci.org/browse/JENKINS-34847
+
+# - job-template:
+#     name: '{name}-terraform-validate'
+#     display-name: '{name} Terraform Config Validate'
+#     project-type: freestyle
+#     defaults: global
+#     description: 'Do not edit this job through the web!'
+#     disabled: false
+#     scm:
+#       - git:
+#           url: 'ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git'
+#           credentials-id: '9a12b119-5a82-4998-b102-f361ac3a2269'
+#           refspec: '+refs/pull-requests/*:refs/remotes/origin/pr/*'
+#           branches:
+#             - 'origin/pr/${{pullRequestId}}/from'
+#           skip-tag: true
+#           timeout: 5
+#     triggers:
+#       - raw:
+#           xml: |
+#             <stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger plugin="stash-pullrequest-builder@1.5.3">
+#               <spec>* * * * *</spec>
+#               <cron>* * * * *</cron>
+#               <stashHost>https://platform.devops.vodafone.com/stash</stashHost>
+#               <credentialsId>6462b05c-7217-4336-acb3-01ac292e4149</credentialsId>
+#               <projectCode>VFLEAP</projectCode>
+#               <repositoryName>vfdo-esim-platform</repositoryName>
+#               <ciSkipPhrases>NO TEST</ciSkipPhrases>
+#               <ciBuildPhrases>test this please</ciBuildPhrases>
+#               <targetBranchesToBuild/>
+#               <ignoreSsl>true</ignoreSsl>
+#               <checkDestinationCommit>false</checkDestinationCommit>
+#               <checkMergeable>false</checkMergeable>
+#               <checkNotConflicted>false</checkNotConflicted>
+#               <onlyBuildOnComment>false</onlyBuildOnComment>
+#               <deletePreviousBuildFinishComments>false</deletePreviousBuildFinishComments>
+#             </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
+#     node: '{node}'
+#     builders:
+#       - shell:
+#           !include-raw-escape: terraform-validate.sh
+#     publishers:
+#       - junit:
+#           results: 'report.xml'
