@@ -24,7 +24,7 @@
           !include-raw-escape: terraform-validate.sh
     publishers:
       - junit:
-          results: 'report.xml'
+          results: 'test/report.xml'
 
 # Job would use stash-pullrequest-builder but until the plugin has been updated
 # it is not currently compatible with Jenkins2 15.07.2016
