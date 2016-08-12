@@ -1,0 +1,13 @@
+---
+- job-template:
+    name: '{name}-terraform-destroy'
+    display-name: '{name} Terraform Plan Destroy'
+    defaults: '{name}-terraform'
+    description: |
+      Use the terraform plans to destroy a platform for the selected Environment
+      and Market. <b>Note</b>: This job has been built with Jenkins Job Builder.
+      Do not edit this job through the web!'
+    disabled: false
+    builders:
+      - shell:
+          !include-raw-escape: terraform-destroy.sh

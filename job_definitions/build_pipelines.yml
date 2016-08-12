@@ -8,5 +8,5 @@
     node: esim-buildslave01
     jobs:
       - '{name}-terraform-validate'
-      # - '{name}-terraform-build'
-      # - '{name}-terraform-destroy'
+      - '{name}-terraform-build'
+      - '{name}-terraform-destroy'

@@ -1,0 +1,43 @@
+---
+- defaults:
+    name: '{name}-terraform'
+    project-type: freestyle
+    properties:
+      - throttle:
+          enabled: true
+          max-per-node: 1
+          max-total: 0
+          categories:
+            - '{name}-terraform-run'
+          option: category
+    parameters:
+      - choice:
+          name: TF_VAR_environment
+          choices:
+            - DEMO
+            - DEV
+            - TEST
+            - STAGING
+          description: |
+            Select the environment you want to setup this new ESIM platform for.
+      - string:
+          name: TF_VAR_owner
+          default: jenkins@devops.vodafone.com
+          description: |
+            Enter the e-mail address of the person creating this environment.
+    scm:
+      - git:
+          url: 'ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git'
+          credentials-id: '9a12b119-5a82-4998-b102-f361ac3a2269'
+          branches:
+            - '*/master'
+          skip-tag: true
+          timeout: 5
+    wrappers:
+      - ansicolor
+    node: '{node}'
+    publishers:
+      - archive:
+          artifacts: 'terraform/*.tf*'
+          allow-empty: 'true'
+          only-if-success: false
