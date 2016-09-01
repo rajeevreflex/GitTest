@@ -21,6 +21,8 @@ Installation is simple, (suggest using `virtualenv` to isolate the JJB from your
   pip install jenkins-job-builder
 ```
 
+On macOS, it's recommended that you use the flag "-p /usr/bin/python2.7" when creating the virtualenv. This is to ensure that the System Keychain is used when checking the SSL certificate of the Jenkins server. Using the Homebrew version of Python may result in SSL certificate validation errors.
+
 ## Are there any third-party plugins that need to be installed?
 
 Yes, install the following via `pip`
