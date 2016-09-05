@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Change to the correct workspace directory and execute JSHint to verify the code
 #
