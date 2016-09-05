@@ -1,5 +1,5 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
+#
 ## Load environment variables
 source ./LEAP/test/leap_env_variables.sh
 
