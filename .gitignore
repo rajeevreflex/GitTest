@@ -4,3 +4,5 @@
 
 # Don't include any JJB personal configuration
 **/jenkins_jobs.ini
+.DS_Store
+venv/
