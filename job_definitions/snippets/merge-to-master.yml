@@ -1,0 +1,56 @@
+---
+- job-template:
+    name: '{name}-rebase-on-master'
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Rebase on MASTER for {name}'
+    node: '{name}'
+    scm:
+      - '{app_code_repository_type}':
+          url: '{app_code_repository_uri}'
+          credentials-id: '{app_code_repository_credentials}'
+          git-config-name: '{app_code_repository_display_name}'
+          git-config-email: '{app_code_repository_display_email}'
+          timeout: 5
+    builders:
+      - shell: git rebase origin/master
+    publishers:
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-{repo_language}-lint'
+            current-parameters: true
+            git-revision: true
+            condition: SUCCESS
+            node-label: '{name}'
+
+- job-template:
+    name: '{name}-merge-to-master'
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Merge to MASTER for {name}'
+    node: '{name}'
+    scm:
+      - '{code_repository_type}':
+          url: '{code_repository_uri}'
+          credentials-id: '{app_code_repository_credentials}'
+          git-config-name: '{app_code_repository_display_name}'
+          git-config-email: '{app_code_repository_display_email}'
+          timeout: 5
+    builders:
+      - shell: git rebase origin/master
+    publishers:
+      - git:
+          push-only-if-success: false
+          tags:
+            - tag:
+                name: '{name}-$BUILD_TAG'
+                message: '$BUILD_TAG'
+                create-tag: true
+                update-tag: true
+          branches:
+            - branch:
+                name: 'master'
