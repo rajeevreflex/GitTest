@@ -33,4 +33,5 @@
       - '{name}-rebase-on-master'
       - '{name}-nodejs-lint'
       - '{name}-nodejs-unittest'
-      - '{name}-merge-to-master'
+      # - '{name}-merge-to-master'
+      - '{name}-build-artefact'

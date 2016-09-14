@@ -1,0 +1,29 @@
+- job-template:
+    name: '{name}-build-artefact'
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Build artefact for {name}'
+    node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+    wrappers:
+      - ansicolor
+    scm:
+      - '{app_code_repository_type}':
+          url: '{config_code_repository_uri}'
+          branches:
+            - origin/master
+          credentials-id: '{config_code_repository_credentials}'
+          git-config-name: '{config_code_repository_display_name}'
+          git-config-email: '{config_code_repository_display_email}'
+          timeout: 5
+    wrappers:
+      - ssh-agent-credentials:
+            users:
+                - '{app_code_repository_credentials}'
+    builders:
+      - shell: !include-raw-escape: build-artefact.sh

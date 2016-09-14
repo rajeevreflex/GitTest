@@ -41,11 +41,11 @@
                 healthy: 90
                 unhealthy: 80
                 failing: 80
-            - lines:
+            - line:
                 healthy: 90
                 unhealthy: 80
                 failing: 80
-            - conditionals:
+            - conditional:
                 healthy: 90
                 unhealthy: 80
                 failing: 80
@@ -56,6 +56,11 @@
           keep-all: true
           allow-missing: true
           link-to-last-build: true
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-build-artefact'
+            predefined-parameters: APP_GIT_COMMIT=${{GIT_COMMIT}}
+            condition: SUCCESS
       # - conditional-publisher: RE-ENABLE FOR PRODUCTION - WILL ADD A TAG TO THE GIT REPO
       #     - condition-kind: regexp
       #       condition-expression: '^.*[Ss]print[0-9]+_[Bb]ranch'
