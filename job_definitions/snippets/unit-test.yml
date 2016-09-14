@@ -6,6 +6,15 @@
     disabled: false
     display-name: 'Unit Tests for {name}'
     node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Test
+          task: NodeJS Unit Tests
+    wrappers:
+      - ansicolor
     scm:
       - '{app_code_repository_type}':
           url: '{app_code_repository_uri}'
