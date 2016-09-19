@@ -6,6 +6,15 @@
     disabled: false
     display-name: 'Unit Tests for {name}'
     node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Test
+          task: NodeJS Unit Tests
+    wrappers:
+      - ansicolor
     scm:
       - '{app_code_repository_type}':
           url: '{app_code_repository_uri}'
@@ -32,11 +41,11 @@
                 healthy: 90
                 unhealthy: 80
                 failing: 80
-            - lines:
+            - line:
                 healthy: 90
                 unhealthy: 80
                 failing: 80
-            - conditionals:
+            - conditional:
                 healthy: 90
                 unhealthy: 80
                 failing: 80
@@ -47,6 +56,11 @@
           keep-all: true
           allow-missing: true
           link-to-last-build: true
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-build-artefact'
+            predefined-parameters: APP_GIT_COMMIT=${{GIT_COMMIT}}
+            condition: SUCCESS
       # - conditional-publisher: RE-ENABLE FOR PRODUCTION - WILL ADD A TAG TO THE GIT REPO
       #     - condition-kind: regexp
       #       condition-expression: '^.*[Ss]print[0-9]+_[Bb]ranch'
