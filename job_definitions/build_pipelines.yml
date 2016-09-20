@@ -35,3 +35,4 @@
       - '{name}-nodejs-unittest'
       # - '{name}-merge-to-master'
       - '{name}-build-artefact'
+      - '{name}-deploy-to-systemtest'

@@ -9,7 +9,7 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Build artefact for {name}'
+    display-name: 'Deploy {name} to Systemtest environment'
     node: '{name}'
     properties:
       - build-discarder:
@@ -29,5 +29,9 @@
           git-config-name: '{config_code_repository_display_name}'
           git-config-email: '{config_code_repository_display_email}'
           timeout: 5
+    wrappers:
+      - ssh-agent-credentials:
+            users:
+                - '{app_code_repository_credentials}'
     builders:
       - shell: !include-raw-escape: deploy-artefact.sh

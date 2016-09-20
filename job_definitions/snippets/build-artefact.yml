@@ -36,4 +36,4 @@
       - pipeline:
           project: '{name}-deploy-to-systemtest'
           current-parameters: true
-          predefined-parameters: ARTEFACT_VERSION={{BUILD_NUMBER}}-{{APP_GIT_COMMIT}}"
+          predefined-parameters: ARTEFACT_VERSION=${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
