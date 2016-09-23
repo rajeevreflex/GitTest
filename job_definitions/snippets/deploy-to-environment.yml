@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-deploy-to-systemtest'
+    name: '{name}-deploy-to-{environment}'
     parameters:
       - string:
           name: ARTEFACT_VERSION
@@ -9,7 +9,7 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Deploy {name} to Systemtest environment'
+    display-name: 'Deploy {name} to {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
@@ -17,7 +17,7 @@
           num-to-keep: 100
       - inject:
           properties-content: |
-            TF_VAR_environment=systemtest
+            TF_VAR_environment={environment}
     wrappers:
       - ansicolor
     scm:
@@ -35,3 +35,7 @@
                 - '{app_code_repository_credentials}'
     builders:
       - shell: !include-raw-escape: deploy-artefact.sh
+    publishers:
+      - pipeline:
+          project: '{name}-deploy-to-{next_environment}'
+          current-parameters: true
