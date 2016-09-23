@@ -29,9 +29,25 @@
     js_app_file: vfleap.js
     repo_language: nodejs
     jobs:
-      - '{name}-checkout-code'
-      - '{name}-rebase-on-master'
-      - '{name}-nodejs-lint'
-      - '{name}-nodejs-unittest'
-      # - '{name}-merge-to-master'
+      - '{name}-checkout-code-master'
+      # - '{name}-rebase-on-master'
+      # - '{name}-nodejs-lint'
+      # - '{name}-nodejs-unittest'
+      # # - '{name}-merge-to-master'
       - '{name}-build-artefact'
+    #  - '{name}-deploy-to-systemtest'
+      - '{name}-deploy-to-{environment}':
+          environment: systemtest
+          next_environment: dev
+      - '{name}-deploy-to-{environment}':
+          environment: dev
+          next_environment: staging
+      - '{name}-deploy-to-{environment}':
+          environment: staging
+          next_environment: preprod
+      - '{name}-deploy-to-{environment}':
+          environment: preprod
+          next_environment: production
+      - '{name}-deploy-to-{environment}':
+          environment: production
+          next_environment: none

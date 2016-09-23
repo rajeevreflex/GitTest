@@ -1,20 +1,23 @@
 - job-template:
-    name: '{name}-build-artefact'
+    name: '{name}-deploy-to-{environment}'
     parameters:
       - string:
-          name: APP_GIT_COMMIT
+          name: ARTEFACT_VERSION
           default: ""
-          description: "The git commit of the VFLEAP repository"
+          description: "The artefact version to deploy"
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Build artefact for {name}'
+    display-name: 'Deploy {name} to {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
+      - inject:
+          properties-content: |
+            TF_VAR_environment={environment}
     wrappers:
       - ansicolor
     scm:
@@ -31,9 +34,8 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-      - shell: !include-raw-escape: build-artefact.sh
+      - shell: !include-raw-escape: deploy-artefact.sh
     publishers:
       - pipeline:
-          project: '{name}-deploy-to-systemtest'
+          project: '{name}-deploy-to-{next_environment}'
           current-parameters: true
-          predefined-parameters: ARTEFACT_VERSION=${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
