@@ -17,7 +17,7 @@
           num-to-keep: 100
       - inject:
           properties-content: |
-            TF_VAR_environment={environment}
+            ENVIRONMENT={environment}
     wrappers:
       - ansicolor
     scm:
