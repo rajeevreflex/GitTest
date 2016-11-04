@@ -35,9 +35,12 @@ We believe firmly in DRY (Don't Repeat Yourself) coding practices, therefore any
 
 ## How do I make sure my jobs are processed?
 
-Copy the sample config file in this repository to `jenkins_jobs.ini` (NB: This file is ignored by default, so your changes will not be saved up to the master repository).
+Copy the sample config file `jenkins_jobs.sample.ini` in this repository to `jenkins_jobs.ini` (NB: This file is ignored by default, so your changes will not be saved up to the master repository).
 
 Update the file you have just created with your API username and password and then follow the instructions below to make your changes.
+
+Your user name on Jenkins at this URL `https://platform.devops.vodafone.com/jenkins/user/jenkins/configure`
+Then copy user id and api token into place.
 
 ```
 # Run this command to verify the changes are correct (you will see the XML printed to your screen)
