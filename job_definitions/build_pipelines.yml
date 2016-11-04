@@ -37,10 +37,10 @@
       - '{name}-build-artefact'
     #  - '{name}-deploy-to-systemtest'
       - '{name}-deploy-to-{environment}':
-          environment: systemtest
-          next_environment: dev
-      - '{name}-deploy-to-{environment}':
           environment: dev
+          next_environment: systemtest
+      - '{name}-deploy-to-{environment}':
+          environment: systemtest
           next_environment: staging
       - '{name}-deploy-to-{environment}':
           environment: staging
