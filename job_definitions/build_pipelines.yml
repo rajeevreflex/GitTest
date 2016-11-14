@@ -26,17 +26,13 @@
     app_code_repository_type: git
     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
     artefact_version_prefix: M
+    initial_deployment_target: dev
     workspace_clone_glob: 'LEAP/**'
     js_app_file: vfleap.js
     repo_language: nodejs
     jobs:
       - '{name}-checkout-code-master'
-      # - '{name}-rebase-on-master'
-      # - '{name}-nodejs-lint'
-      # - '{name}-nodejs-unittest'
-      # # - '{name}-merge-to-master'
       - '{name}-build-artefact'
-    #  - '{name}-deploy-to-systemtest'
       - '{name}-deploy-to-{environment}':
           environment: dev
           next_environment: systemtest
@@ -68,15 +64,21 @@
     app_code_repository_type: git
     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
     artefact_version_prefix: B
+    initial_deployment_target: preprod
     workspace_clone_glob: 'LEAP/**'
     js_app_file: vfleap.js
     repo_language: nodejs
     jobs:
       - '{name}-checkout-code-branches'
-      - '{name}-build-artefact-branches'
+      - '{name}-build-artefact'
       - '{name}-deploy-to-{environment}':
           environment: preprod
           next_environment: none
+
+
+
+
+
       ###
       # below was the intention
       ##
