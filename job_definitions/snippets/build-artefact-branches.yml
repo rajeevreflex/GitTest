@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-build-artefact'
+    name: '{name}-build-artefact-branches'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -17,7 +17,7 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: '{name} build artefact'
+    display-name: '{name} build artefact branches'
     node: '{name}'
     properties:
       - build-discarder:
@@ -45,9 +45,9 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-      - shell: !include-raw-escape: build-artefact.sh
+      - shell: !include-raw-escape: build-artefact-branches.sh
     publishers:
       - pipeline:
-          project: '{name}-deploy-to-dev'
+          project: '{name}-deploy-to-branches-branchesdev'
           current-parameters: true
           predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}

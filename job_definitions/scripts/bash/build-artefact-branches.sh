@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 ###
+#export ARTEFACT_VERSION=${ARTEFACT_VERSION}
 export APP_GIT_COMMIT="${APP_GIT_COMMIT}"
 export APP_GIT_BRANCH="${APP_GIT_BRANCH}"
 export ESIM_PLATFORM_GIT_COMMIT="${GIT_COMMIT}"

@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-build-artefact'
+    name: '{name}-deploy-to-branches-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -13,22 +13,28 @@
           name: APP_GIT_BRANCH
           default: ""
           description: "The git branch of the VFLEAP repository"
+      - string:
+          name: ARTEFACT_VERSION
+          default: ""
+          description: "The artefact version to deploy"
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: '{name} build artefact'
+    display-name: 'Deploy {name} to branches {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Build
-          task: Build Artefact
+          stage: Deploy
+          task: Deploy to {environment}
+          description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
-            ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
+            ENVIRONMENT={environment}
+            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
     wrappers:
       - ansicolor
     scm:
@@ -45,9 +51,8 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-      - shell: !include-raw-escape: build-artefact.sh
+      - shell: !include-raw-escape: deploy-artefact-branches.sh
     publishers:
       - pipeline:
-          project: '{name}-deploy-to-dev'
+          project: '{name}-deploy-to-branches-{next_environment}'
           current-parameters: true
-          predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}

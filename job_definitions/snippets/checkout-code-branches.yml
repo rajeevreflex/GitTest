@@ -1,11 +1,11 @@
 ---
 - job-template:
-    name: '{name}-checkout-code-master'
+    name: '{name}-checkout-code-branches'
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Code Checkout for {name} Master branch'
+    display-name: 'Code Checkout for {name} branches'
     node: '{name}'
     properties:
       - build-discarder:
@@ -20,7 +20,7 @@
       - '{app_code_repository_type}':
           url: '{app_code_repository_uri}'
           branches:
-            - 'origin/master'
+            - ':^(?!.*master).*$'
           credentials-id: '{app_code_repository_credentials}'
           git-config-name: '{app_code_repository_display_name}'
           git-config-email: '{app_code_repository_display_email}'
@@ -28,13 +28,13 @@
     triggers:
       - bitbucket
       - pollscm:
-          cron: "*/5 * * * *"
+          cron: "*/1 * * * *"
     builders:
-      - shell: echo "======= Building $GIT_BRANCH ======="
+      - shell: echo "======= Building branches $GIT_BRANCH ======="
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-build-artefact'
+              - '{name}-build-artefact-branches'
             predefined-parameters: |
               PIPELINE_NUMBER=${{BUILD_NUMBER}}
               APP_GIT_COMMIT=${{GIT_COMMIT}}
