@@ -74,7 +74,7 @@
     jobs:
       - '{name}-checkout-code-branches'
       - '{name}-build-artefact-branches'
-      - '{name}-deploy-to-branches-{environment}':
+      - '{name}-deploy-to-{environment}':
           environment: preprod
           next_environment: none
       ###
