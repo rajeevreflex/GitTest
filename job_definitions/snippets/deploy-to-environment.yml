@@ -2,6 +2,18 @@
     name: '{name}-deploy-to-{environment}'
     parameters:
       - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
+      - string:
           name: ARTEFACT_VERSION
           default: ""
           description: "The artefact version to deploy"
@@ -15,9 +27,14 @@
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
+      - delivery-pipeline:
+          stage: Deploy
+          task: Deploy to {environment}
+          description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
             ENVIRONMENT={environment}
+            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
     wrappers:
       - ansicolor
     scm:

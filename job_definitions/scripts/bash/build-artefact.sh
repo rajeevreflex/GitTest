@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #
 ###
-export GIT_COMMIT=${APP_GIT_COMMIT}
-export ARTEFACT_VERSION="${BUILD_NUMBER}-${GIT_COMMIT}"
+export APP_GIT_COMMIT="${APP_GIT_COMMIT}"
+export APP_GIT_BRANCH="${APP_GIT_BRANCH}"
+export ESIM_PLATFORM_GIT_COMMIT="${GIT_COMMIT}"
+export PIPELINE_NUMBER="${PIPELINE_NUMBER}"
+
 ./run --package

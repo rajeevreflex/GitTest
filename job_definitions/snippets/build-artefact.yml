@@ -2,19 +2,33 @@
     name: '{name}-build-artefact'
     parameters:
       - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
           name: APP_GIT_COMMIT
           default: ""
           description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Build artefact for {name}'
+    display-name: '{name} build artefact'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
+      - delivery-pipeline:
+          stage: Build
+          task: Build Artefact
+      - inject:
+          properties-content: |
+            ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
     wrappers:
       - ansicolor
     scm:
@@ -34,6 +48,6 @@
       - shell: !include-raw-escape: build-artefact.sh
     publishers:
       - pipeline:
-          project: '{name}-deploy-to-dev'
+          project: '{name}-deploy-to-{initial_deployment_target}'
           current-parameters: true
-          predefined-parameters: ARTEFACT_VERSION=${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
+          predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
