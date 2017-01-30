@@ -33,9 +33,10 @@
       - ansicolor
     scm:
       - '{config_code_repository_type}':
+          refspec:'+refs/tags/*:refs/remotes/origin/tags/*'
           url: '{config_code_repository_uri}'
           branches:
-            - origin/master
+            - 'origin/tags/Release-*'
           credentials-id: '{config_code_repository_credentials}'
           git-config-name: '{config_code_repository_display_name}'
           git-config-email: '{config_code_repository_display_email}'
