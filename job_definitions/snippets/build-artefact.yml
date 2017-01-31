@@ -33,7 +33,7 @@
       - ansicolor
     scm:
       - '{config_code_repository_type}':
-          refspec:'+refs/tags/*:refs/remotes/origin/tags/*'
+          refspec: '+refs/tags/*:refs/remotes/origin/tags/*'
           url: '{config_code_repository_uri}'
           branches:
             - 'origin/tags/Release-*'
