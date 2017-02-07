@@ -9,6 +9,6 @@ CODE_PATH=$(echo $FULL_GLOB|cut -d '/' -f 1)
 
 # Now run the coverage command
 cd $CODE_PATH
-echo "Changing to $(pwd) and running Grunt"
+echo "Changing to $(pwd) and running npm install"
 npm install
 npm test
