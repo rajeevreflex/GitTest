@@ -11,4 +11,4 @@ CODE_PATH=$(echo $FULL_GLOB|cut -d '/' -f 1)
 cd $CODE_PATH
 echo "Changing to $(pwd) and running Grunt"
 npm install
-grunt unittest
+npm test
