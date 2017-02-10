@@ -1,0 +1,39 @@
+---
+- job-template:
+    name: '{name}-launch-bluemix-environment-from-repository-scripts'
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Launch an environment in Bluemix for {name} based on the scripts in that repository'
+    node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Test
+          task: Deploy to Bluemix
+    wrappers:
+      - ansicolor
+    scm:
+      - '{code_repository_type}':
+          url: '{code_repository_uri}'
+          credentials-id: '{code_repository_credentials}'
+          git-config-name: '{code_repository_display_name}'
+          git-config-email: '{code_repository_display_email}'
+          timeout: 5
+    builders:
+        - inject:
+            properties-content: |
+                WORKSPACE_CLONE_GLOB={workspace_clone_glob}
+                JS_APP_FILE={js_app_file}
+        - shell: !include-raw-escape: run-bluemix-environment-setup.sh
+    publishers:
+        - trigger-parameterized-builds:
+            - project:
+                - '{name}-merge-to-master'
+              current-parameters: true
+              git-revision: true
+              condition: SUCCESS
+              node-label: '{name}'
