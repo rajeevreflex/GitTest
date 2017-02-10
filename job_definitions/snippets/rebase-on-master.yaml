@@ -1,12 +1,21 @@
 ---
 - job-template:
-    name: '{name}-merge-to-master'
+    name: '{name}-rebase-on-master'
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Merge to MASTER for {name}'
+    display-name: 'Rebase on MASTER for {name}'
     node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Check
+          task: Rebase on MASTER
+    wrappers:
+      - ansicolor
     scm:
       - '{app_code_repository_type}':
           url: '{app_code_repository_uri}'
@@ -17,14 +26,10 @@
     builders:
       - shell: git rebase origin/master
     publishers:
-      - git:
-          push-only-if-success: false
-          tags:
-            - tag:
-                name: '{name}-$BUILD_TAG'
-                message: '$BUILD_TAG'
-                create-tag: true
-                update-tag: true
-          branches:
-            - branch:
-                name: 'master'
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-{repo_language}-eslint'
+            current-parameters: true
+            git-revision: true
+            condition: SUCCESS
+            node-label: '{name}'
