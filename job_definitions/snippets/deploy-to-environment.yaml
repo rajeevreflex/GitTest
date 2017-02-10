@@ -38,7 +38,7 @@
     wrappers:
       - ansicolor
     scm:
-      - '{app_code_repository_type}':
+      - '{config_code_repository_type}':
           url: '{config_code_repository_uri}'
           branches:
             - origin/master
