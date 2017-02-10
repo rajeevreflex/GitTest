@@ -1,0 +1,70 @@
+- job-template:
+    name: '{name}-nodejs-unittest'
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Unit Tests for {name}'
+    node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 500
+      - delivery-pipeline:
+          stage: Test
+          task: NodeJS Unit Tests
+    wrappers:
+      - ansicolor
+    scm:
+      - '{code_repository_type}':
+          url: '{code_repository_uri}'
+          credentials-id: '{code_repository_credentials}'
+          git-config-name: '{code_repository_display_name}'
+          git-config-email: '{code_repository_display_email}'
+          timeout: 5
+    builders:
+      - inject:
+          properties-content: |
+            WORKSPACE_CLONE_GLOB={workspace_clone_glob}
+            JS_APP_FILE={js_app_file}
+      - shell: !include-raw-escape: run-nodejs-code-coverage.sh
+      - shell: !include-raw-escape: run-nodejs-unit-tests.sh
+    publishers:
+      - cobertura:
+          report-file: "**/test/coverage/cobertura-coverage.xml"
+          targets:
+            - files:
+                healthy: 100
+                unhealthy: 100
+                failing: 100
+            - method:
+                healthy: 90
+                unhealthy: 80
+                failing: 80
+            - line:
+                healthy: 90
+                unhealthy: 80
+                failing: 80
+            - conditional:
+                healthy: 90
+                unhealthy: 80
+                failing: 80
+      - html-publisher:
+          name: "{name} nodejs coverage"
+          dir: "test/coverage/lcov-report/"
+          files: "index.html"
+          keep-all: true
+          allow-missing: true
+          link-to-last-build: true
+      - conditional-publisher:
+          - condition-kind: regexp
+            condition-expression: '^.*[Ss]print[0-9]+_[Bb]ranch'
+            condition-searchtext: '${{GIT_BRANCH}}'
+            action:
+              - trigger-parameterized-builds:
+                - project:
+                    - '{name}-merge-to-master'
+                  current-parameters: true
+                  git-revision: true
+                  condition: SUCCESS
+                  node-label: '{name}'
