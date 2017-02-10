@@ -27,7 +27,6 @@
           properties-content: |
             WORKSPACE_CLONE_GLOB={workspace_clone_glob}
             JS_APP_FILE={js_app_file}
-      - shell: !include-raw-escape: run-nodejs-code-coverage.sh
       - shell: !include-raw-escape: run-nodejs-unit-tests.sh
     publishers:
       - cobertura:
