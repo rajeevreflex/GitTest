@@ -28,7 +28,7 @@
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-{repo_language}-lint'
+              - '{name}-{repo_language}-eslint'
             current-parameters: true
             git-revision: true
             condition: SUCCESS
