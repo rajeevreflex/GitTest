@@ -17,13 +17,13 @@
     wrappers:
       - ansicolor
     scm:
-      - '{code_repository_type}':
-          url: '{code_repository_uri}'
+      - '{app_code_repository_type}':
+          url: '{app_code_repository_uri}'
           branches:
             - ':^(?!.*master).*$'
-          credentials-id: '{code_repository_credentials}'
-          git-config-name: '{code_repository_display_name}'
-          git-config-email: '{code_repository_display_email}'
+          credentials-id: '{app_code_repository_credentials}'
+          git-config-name: '{app_code_repository_display_name}'
+          git-config-email: '{app_code_repository_display_email}'
           timeout: 5
     triggers:
       - bitbucket
