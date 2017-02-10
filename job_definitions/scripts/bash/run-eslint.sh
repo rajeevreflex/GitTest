@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 #
-# Change to the correct workspace directory and launch the bluemix environment
+# Change to the correct workspace directory and execute JSHint to verify the code
 #
 # (c) DevOpsGuys/Vodafone 2016
 # Author: Matthew Macdonald-Wallace <matthew.macdonald-wallace@devopsguys.com>
-
-set -x
 
 ### Find the correct directory against which to execute the lint
 FULL_GLOB=${WORKSPACE_CLONE_GLOB}
@@ -14,5 +12,6 @@ JS_APP_FILE=${JS_APP_FILE}
 
 cd ${CODE_PATH}
 
-### and use the environment launcher script
-bash scripts/launch_ci_environment.sh
+### and run ESLint
+### || : appended to return successfully to force jenkins to continue.
+npm run lint || :
