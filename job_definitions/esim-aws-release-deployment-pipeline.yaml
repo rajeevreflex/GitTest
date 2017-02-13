@@ -1,15 +1,15 @@
 ---
-#### This file contains the build pipelines for the various projects.
+#### This file contains the build pipeline for the eSIM LEAP Infrastructure and
+###  application code deployment pipeline.
+## The Pipeline view values:
+#     Name:
+#         "eSIM Deployment Pipeline"
+#     Description:
+#         ""
+#     Build Pipeline View Title:
+#         "eSIM Deployment"
 
 # You should create one project per product and link all the steps
-
-# - project:
-#     name: ESIM
-#     node: esim-buildslave01
-#     jobs:
-#       - '{name}-terraform-validate'
-#       - '{name}-terraform-build'
-#       - '{name}-terraform-destroy'
 
 - project:
     name: esim-aws
