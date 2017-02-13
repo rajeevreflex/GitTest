@@ -1,6 +1,13 @@
 ---
-#### This file contains the build pipelines for the various projects.
-
+#### This file contains the build pipeline for the eSIM LEAP Infrastructure and
+###  application code deployment pipeline for branches.
+## The Pipeline view values:
+#     Name:
+#         "eSIM Deployment Branches Pipeline"
+#     Description:
+#         "This pipeline packages and deploys from the App Code branches."
+#     Build Pipeline View Title:
+#         "eSIM Deployment Branches"
 # You should create one project per product and link all the steps
 
 - project:
