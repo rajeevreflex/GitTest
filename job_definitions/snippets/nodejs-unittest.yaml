@@ -9,7 +9,7 @@
     properties:
       - build-discarder:
           days-to-keep: 365
-          num-to-keep: 100
+          num-to-keep: 500
       - delivery-pipeline:
           stage: Test
           task: NodeJS Unit Tests
@@ -27,7 +27,6 @@
           properties-content: |
             WORKSPACE_CLONE_GLOB={workspace_clone_glob}
             JS_APP_FILE={js_app_file}
-      - shell: !include-raw-escape: run-nodejs-code-coverage.sh
       - shell: !include-raw-escape: run-nodejs-unit-tests.sh
     publishers:
       - cobertura:
@@ -56,20 +55,15 @@
           keep-all: true
           allow-missing: true
           link-to-last-build: true
-      - trigger-parameterized-builds:
-          - project:
-              - '{name}-build-artefact'
-            predefined-parameters: APP_GIT_COMMIT=${{GIT_COMMIT}}
-            condition: SUCCESS
-      # - conditional-publisher: RE-ENABLE FOR PRODUCTION - WILL ADD A TAG TO THE GIT REPO
-      #     - condition-kind: regexp
-      #       condition-expression: '^.*[Ss]print[0-9]+_[Bb]ranch'
-      #       condition-searchtext: '${{GIT_BRANCH}}'
-      #       action:
-      #         - trigger-parameterized-builds:
-      #           - project:
-      #               - '{name}-merge-to-master'
-      #             current-parameters: true
-      #             git-revision: true
-      #             condition: SUCCESS
-      #             node-label: '{name}'
+      - conditional-publisher:
+          - condition-kind: regexp
+            condition-expression: '^.*[Ss]print[0-9]+_[Bb]ranch'
+            condition-searchtext: '${{GIT_BRANCH}}'
+            action:
+              - trigger-parameterized-builds:
+                - project:
+                    - '{name}-merge-to-master'
+                  current-parameters: true
+                  git-revision: true
+                  condition: SUCCESS
+                  node-label: '{name}'

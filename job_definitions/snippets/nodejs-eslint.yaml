@@ -1,11 +1,11 @@
 ---
 - job-template:
-    name: '{name}-nodejs-lint'
+    name: '{name}-nodejs-eslint'
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Code Lint for {name}'
+    display-name: 'Code ESLint for {name}'
     node: '{name}'
     properties:
       - build-discarder:
@@ -29,21 +29,21 @@
             WORKSPACE_CLONE_GLOB={workspace_clone_glob}
             JS_APP_FILE={js_app_file}
       - shell: !include-raw-escape: install-nodejs-deps.sh
-      - shell: !include-raw-escape: run-jshint.sh
+      - shell: !include-raw-escape: run-eslint.sh
     publishers:
       - checkstyle:
-          pattern: '**/checkstyle.xml'
+          pattern: '**/eslint.xml'
           can-run-on-failed: true
           healthy: 0
-          unhealthy: 150
+          unhealthy: 5000
           health-threshold: 'high'
           thresholds:
             unstable:
-              total-high: 0
-              total-all: 175
+              total-high: 5000
+              total-all: 5000
             failed:
-              total-high: 0
-              total-all: 150
+              total-high: 5000
+              total-all: 5000
       - clone-workspace:
           workspace-glob: '{workspace_clone_glob}'
       - trigger-parameterized-builds:

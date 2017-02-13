@@ -12,3 +12,4 @@ cd $CODE_PATH
 export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 #npm config set registry='http://registry.npmjs.org/'
 npm install
+npm install grunt

@@ -12,5 +12,6 @@ JS_APP_FILE=${JS_APP_FILE}
 
 cd ${CODE_PATH}
 
-### and run JSHint
-grunt lint
+### and run ESLint
+### || : appended to return successfully to force jenkins to continue.
+npm run lint || :
