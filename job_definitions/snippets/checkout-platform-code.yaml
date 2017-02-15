@@ -30,4 +30,4 @@
       - pipeline:
           project: '{name}-build-artefact'
           current-parameters: true
-          predefined-parameters: PLATFORM_RELEASE_ID=${{GIT_COMMIT}}
+          predefined-parameters: PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
