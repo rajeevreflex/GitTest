@@ -3,11 +3,11 @@
 ###  application code deployment pipeline for branches.
 ## The Pipeline view values:
 #     Name:
-#         "test eSIM Deployment Branches Pipeline"
+#         "Test eSIM Deployment Branches Pipeline"
 #     Description:
 #         "This pipeline packages and deploys from the App Code branches."
 #     Build Pipeline View Title:
-#         "test eSIM Deployment Branches"
+#         "Test eSIM Deployment Branches"
 # You should create one project per product and link all the steps
 
 ##################################
@@ -31,8 +31,8 @@
 #     app_code_repository_name: vfleap
 #     app_code_repository_type: git
 #     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
-#     artefact_version_prefix: B
-#     initial_deployment_target: preprod
+#     artefact_version_prefix: T
+#     initial_deployment_target: TODO
 #     workspace_clone_glob: 'LEAP/**'
 #     js_app_file: vfleap.js
 #     repo_language: nodejs
@@ -40,7 +40,7 @@
 #       - '{name}-checkout-code-branches'
 #       - '{name}-build-artefact'
 #       - '{name}-deploy-to-{environment}':
-#           environment: preprod
+#           environment: TODO
 #           next_environment: none
 
 

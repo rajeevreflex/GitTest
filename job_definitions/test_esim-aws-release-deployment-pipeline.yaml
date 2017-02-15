@@ -3,11 +3,11 @@
 ###  application code deployment pipeline.
 ## The Pipeline view values:
 #     Name:
-#         "test eSIM Deployment Pipeline"
+#         "Test eSIM Deployment Pipeline"
 #     Description:
 #         ""
 #     Build Pipeline View Title:
-#         "test eSIM Deployment"
+#         "Test eSIM Deployment"
 
 # You should create one project per product and link all the steps
 
