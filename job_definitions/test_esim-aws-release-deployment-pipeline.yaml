@@ -20,6 +20,8 @@
     config_code_repository_name: vfdo-esim-platform
     config_code_repository_type: git
     config_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git
+    config_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+    config_code_repository_branches: origin/tags/Release-*
     app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
     app_code_repository_display_name: eSIM Jenkins
     app_code_repository_display_email: vodafone-devops-internal@devopsguys.com
@@ -33,6 +35,7 @@
     repo_language: nodejs
     jobs:
       - '{name}-checkout-code-master'
+      - '{name}-checkout-platform-code-latest-tag'
       - '{name}-build-artefact'
       - '{name}-deploy-to-{environment}':
           environment: TODO
