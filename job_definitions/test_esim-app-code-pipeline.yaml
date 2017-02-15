@@ -2,7 +2,7 @@
 #### This file contains the build pipeline for the eSIM LEAP Application Code
 ## The Pipeline view values:
 #     Name:
-#         "eSIM App Code Pipeline"
+#         "test eSIM App Code Pipeline"
 #     Description:
 #         "If the code merged to the non master branches
 #         A) Can be rebased on master
@@ -10,7 +10,7 @@
 #         C) Passes unit tests
 #         The branch will be merged into master."
 #     Build Pipeline View Title:
-#         "eSIM App Code"
+#         "test eSIM App Code"
 
 # You should create one project per product and link all the steps as show for eSIM
 
