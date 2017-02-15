@@ -1,5 +1,6 @@
-# ESIM Jenkins Job builder
-This repository contains the Jenkins Job Builder tasks for the Vodafone CPM project.
+# ESIM Test Jenkins Job builder
+This repository contains the Test Jenkins Job Builder tasks for the Vodafone LEAP project.
+The purpose of the repository is to test changes to pipeline code and platform (infrastructure) code in isolation.
 
 ## What is Jenkins Job Builder?
 

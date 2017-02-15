@@ -3,16 +3,17 @@
 ###  application code deployment pipeline.
 ## The Pipeline view values:
 #     Name:
-#         "eSIM Deployment Pipeline"
+#         "Test eSIM Deployment Pipeline"
 #     Description:
 #         ""
 #     Build Pipeline View Title:
-#         "eSIM Deployment"
+#         "Test eSIM Deployment"
 
 # You should create one project per product and link all the steps
 
 - project:
-    name: esim-aws
+    name: test_esim-aws
+    disabled: true
     config_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
     config_code_repository_display_name: eSIM Jenkins
     config_code_repository_display_email: vodafone-devops-internal@devopsguys.com
@@ -25,8 +26,8 @@
     app_code_repository_name: vfleap
     app_code_repository_type: git
     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
-    artefact_version_prefix: M
-    initial_deployment_target: dev
+    artefact_version_prefix: T
+    initial_deployment_target: TODO
     workspace_clone_glob: 'LEAP/**'
     js_app_file: vfleap.js
     repo_language: nodejs
@@ -34,17 +35,5 @@
       - '{name}-checkout-code-master'
       - '{name}-build-artefact'
       - '{name}-deploy-to-{environment}':
-          environment: dev
-          next_environment: systemtest
-      - '{name}-deploy-to-{environment}':
-          environment: systemtest
-          next_environment: staging
-      - '{name}-deploy-to-{environment}':
-          environment: staging
-          next_environment: preprod
-      - '{name}-deploy-to-{environment}':
-          environment: preprod
-          next_environment: production
-      - '{name}-deploy-to-{environment}':
-          environment: production
+          environment: TODO
           next_environment: none
