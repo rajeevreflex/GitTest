@@ -14,20 +14,26 @@
 
 # You should create one project per product and link all the steps as show for eSIM
 
-- project:
-    name: esim
-    app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
-    app_code_repository_display_name: eSIM Jenkins
-    app_code_repository_display_email: vodafone-devops-internal@devopsguys.com
-    app_code_repository_name: vfleap
-    app_code_repository_type: git
-    app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
-    workspace_clone_glob: 'LEAP/**'
-    js_app_file: vfleap.js
-    repo_language: nodejs
-    jobs:
-      - '{name}-checkout-code'
-      - '{name}-rebase-on-master'
-      - '{name}-nodejs-eslint'
-      - '{name}-nodejs-unittest'
-      - '{name}-merge-to-master'
+##################################
+#
+# The project has been commented out as currently it is not needed to test the pipeline or platform code.
+#
+##################################
+
+# - project:
+#     name: test_esim
+#     app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
+#     app_code_repository_display_name: eSIM Jenkins
+#     app_code_repository_display_email: vodafone-devops-internal@devopsguys.com
+#     app_code_repository_name: vfleap
+#     app_code_repository_type: git
+#     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
+#     workspace_clone_glob: 'LEAP/**'
+#     js_app_file: vfleap.js
+#     repo_language: nodejs
+#     jobs:
+#       - '{name}-checkout-code'
+#       - '{name}-rebase-on-master'
+#       - '{name}-nodejs-eslint'
+#       - '{name}-nodejs-unittest'
+#       - '{name}-merge-to-master'

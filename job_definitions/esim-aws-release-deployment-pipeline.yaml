@@ -12,7 +12,7 @@
 # You should create one project per product and link all the steps
 
 - project:
-    name: esim-aws
+    name: test_esim-aws
     config_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
     config_code_repository_display_name: eSIM Jenkins
     config_code_repository_display_email: vodafone-devops-internal@devopsguys.com
