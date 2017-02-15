@@ -17,14 +17,14 @@
     wrappers:
       - ansicolor
     scm:
-      - '{config_code_repository_type}':
-          refspec: '{config_code_repository_refspec}'
-          url: '{config_code_repository_uri}'
+      - '{platform_code_repository_type}':
+          refspec: '{platform_code_repository_refspec}'
+          url: '{platform_code_repository_uri}'
           branches:
-            - '{config_code_repository_branches}'
-          credentials-id: '{config_code_repository_credentials}'
-          git-config-name: '{config_code_repository_display_name}'
-          git-config-email: '{config_code_repository_display_email}'
+            - '{platform_code_repository_branches}'
+          credentials-id: '{platform_code_repository_credentials}'
+          git-config-name: '{platform_code_repository_display_name}'
+          git-config-email: '{platform_code_repository_display_email}'
           timeout: 5
     publishers:
       - pipeline:

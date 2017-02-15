@@ -32,14 +32,14 @@
     wrappers:
       - ansicolor
     scm:
-      - '{config_code_repository_type}':
+      - '{platform_code_repository_type}':
           refspec: '+refs/tags/*:refs/remotes/origin/tags/*'
-          url: '{config_code_repository_uri}'
+          url: '{platform_code_repository_uri}'
           branches:
             - 'origin/tags/Release-*'
-          credentials-id: '{config_code_repository_credentials}'
-          git-config-name: '{config_code_repository_display_name}'
-          git-config-email: '{config_code_repository_display_email}'
+          credentials-id: '{platform_code_repository_credentials}'
+          git-config-name: '{platform_code_repository_display_name}'
+          git-config-email: '{platform_code_repository_display_email}'
           timeout: 5
     wrappers:
       - ssh-agent-credentials:
