@@ -35,7 +35,7 @@
     repo_language: nodejs
     jobs:
       - '{name}-checkout-code-master'
-      - '{name}-checkout-platform-code-latest-tag'
+      - '{name}-checkout-platform-code'
       - '{name}-build-artefact'
       - '{name}-deploy-to-{environment}':
           environment: TODO
