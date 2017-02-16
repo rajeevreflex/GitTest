@@ -2,7 +2,36 @@
 #
 # filename: utility-echo-git-plugin-environment-variables.sh
 ###
+if [[ ${JOB_NAME} == "test_esim-aws-checkout-code-master" ]]; then
+  echo yes test_esim-aws-checkout-code-master
+else
+  echo no
+fi
+
+if [[ ${JOB_NAME} == "test_esim-aws-checkout-platform-code" ]]; then
+  echo yes test_esim-aws-checkout-platform-code
+else
+  echo no
+fi
+
+if [[ ${JOB_NAME} == "test_esim-aws-build-artefact" ]]; then
+  echo yes test_esim-aws-build-artefact
+  echo "PLATFORM_RELEASE_COMMIT_ID: ${PLATFORM_RELEASE_COMMIT_ID}"
+  echo "GIT_COMMIT: ${GIT_COMMIT}"
+
+  echo "PLATFORM_RELEASE_BRANCH: ${PLATFORM_RELEASE_BRANCH}"
+  echo "GIT_BRANCH: ${GIT_BRANCH}"
+else
+  echo no
+fi
+
 echo "
+JOB_NAME - Name of job
+== ${JOB_NAME}
+
+JOB_BASE_NAME - Name of job
+== ${JOB_BASE_NAME}
+
 
 #############
 
