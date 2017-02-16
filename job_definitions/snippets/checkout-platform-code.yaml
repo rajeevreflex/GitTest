@@ -1,6 +1,19 @@
 ---
 - job-template:
     name: '{name}-checkout-platform-code'
+    parameters:
+      - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
@@ -30,4 +43,9 @@
       - pipeline:
           project: '{name}-build-artefact'
           current-parameters: true
-          predefined-parameters: PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
+          predefined-parameters: |
+            PIPELINE_NUMBER=${{BUILD_NUMBER}}
+            APP_GIT_COMMIT=${{GIT_COMMIT}}
+            APP_GIT_BRANCH=${{GIT_BRANCH}}
+            PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
+          condition: SUCCESS
