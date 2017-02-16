@@ -44,8 +44,5 @@
           project: '{name}-build-artefact'
           current-parameters: true
           predefined-parameters: |
-            PIPELINE_NUMBER=${{BUILD_NUMBER}}
-            APP_GIT_COMMIT=${{GIT_COMMIT}}
-            APP_GIT_BRANCH=${{GIT_BRANCH}}
             PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
           condition: SUCCESS
