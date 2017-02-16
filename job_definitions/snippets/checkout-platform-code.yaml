@@ -39,10 +39,15 @@
           git-config-name: '{platform_code_repository_display_name}'
           git-config-email: '{platform_code_repository_display_email}'
           timeout: 5
+    builders:
+      - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
+      - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
     publishers:
-      - pipeline:
-          project: '{name}-build-artefact'
-          current-parameters: true
-          predefined-parameters: |
-            PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
-          condition: SUCCESS
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-build-artefact'
+            current-parameters: true
+            predefined-parameters: |
+              PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
+              PLATFORM_RELEASE_BRANCH=${{GIT_BRANCH}}
+            condition: SUCCESS
