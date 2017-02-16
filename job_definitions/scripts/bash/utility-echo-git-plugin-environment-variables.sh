@@ -14,16 +14,36 @@ else
   echo no
 fi
 
-if [[ ${JOB_NAME} == "test_esim-aws-build-artefact" ]]; then
-  echo yes test_esim-aws-build-artefact
-  echo "PLATFORM_RELEASE_COMMIT_ID: ${PLATFORM_RELEASE_COMMIT_ID}"
-  echo "GIT_COMMIT: ${GIT_COMMIT}"
+testcommitids() {
 
-  echo "PLATFORM_RELEASE_BRANCH: ${PLATFORM_RELEASE_BRANCH}"
-  echo "GIT_BRANCH: ${GIT_BRANCH}"
-else
-  echo no
+  if [[ "${PLATFORM_RELEASE_BRANCH}" != "${GIT_BRANCH}" ]]; then
+    echo not same branch
+    exit 1
+  fi
+
+# this will fail and is expected
+  # if [[ "${PLATFORM_RELEASE_COMMIT_ID}" != "${GIT_COMMIT}" ]]; then
+  #   echo not same commit id
+  #   exit 1
+  # fi
+
+}
+
+if [[ ${JOB_NAME} == "test_esim-aws-build-artefact" ]]; then
+  testcommitids
 fi
+
+if [[ ${JOB_NAME} == "test_esim-aws-deploy-to-TODO" ]]; then
+  testcommitids
+fi
+
+echo "PLATFORM_RELEASE_COMMIT_ID: ${PLATFORM_RELEASE_COMMIT_ID}"
+echo "GIT_COMMIT: ${GIT_COMMIT}"
+
+echo "PLATFORM_RELEASE_BRANCH: ${PLATFORM_RELEASE_BRANCH}"
+echo "GIT_BRANCH: ${GIT_BRANCH}"
+
+
 
 echo "
 JOB_NAME - Name of job
