@@ -37,6 +37,6 @@
       - '{name}-checkout-code-master'
       - '{name}-checkout-platform-code'
       - '{name}-build-artefact'
-      # - '{name}-deploy-to-{environment}':
-      #     environment: TODO
-      #     next_environment: none
+      - '{name}-deploy-to-{environment}':
+          environment: TODO
+          next_environment: none
