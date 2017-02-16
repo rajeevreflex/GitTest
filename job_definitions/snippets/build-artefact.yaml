@@ -41,10 +41,9 @@
       - ansicolor
     scm:
       - '{platform_code_repository_type}':
-          refspec: '{platform_code_repository_refspec}'
           url: '{platform_code_repository_uri}'
           branches:
-            - '{platform_code_repository_branches}'
+            - ${{PLATFORM_RELEASE_COMMIT_ID}}
           credentials-id: '{platform_code_repository_credentials}'
           git-config-name: '{platform_code_repository_display_name}'
           git-config-email: '{platform_code_repository_display_email}'
