@@ -39,6 +39,8 @@
       - '{name}-build-artefact'
       - '{name}-provision-{environment}':
             environment: TODO
+      - '{name}-configure-{environment}':
+            environment: TODO
       - '{name}-deploy-to-{environment}':
           environment: TODO
           next_environment: none

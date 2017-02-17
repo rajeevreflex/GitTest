@@ -1,6 +1,6 @@
 ---
 - job-template:
-    name: '{name}-provision-{environment}'
+    name: '{name}-configure-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -30,7 +30,7 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Provison {environment} environment for {name}.'
+    display-name: 'Configure {environment} environment for {name}.'
     node: '{name}'
     properties:
       - build-discarder:
@@ -58,11 +58,11 @@
     builders:
         - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
         - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
-        - shell: echo "Provisioning environment ${{ENVIRONMENT}}"
-      # - shell: !include-raw-escape: provision-environment.sh
+        - shell: echo "Configure environment ${{ENVIRONMENT}}"
+      # - shell: !include-raw-escape: configure-environment.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-configure-{initial_deployment_target}'
+              - '{name}-deploy-to-{initial_deployment_target}'
             current-parameters: true
             condition: SUCCESS
