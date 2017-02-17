@@ -39,7 +39,6 @@
       - inject:
           properties-content: |
             ENVIRONMENT={environment}
-            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
     wrappers:
       - ansicolor
     scm:
