@@ -1,5 +1,6 @@
+---
 - job-template:
-    name: '{name}-build-artefact'
+    name: '{name}-provision-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -14,6 +15,10 @@
           default: ""
           description: "The git branch of the VFLEAP repository"
       - string:
+          name: ARTEFACT_VERSION
+          default: ""
+          description: "The artefact version to deploy"
+      - string:
           name: PLATFORM_RELEASE_COMMIT_ID
           default: ""
           description: "The git commit of the latest release in the vfdo-esim-platform repository."
@@ -25,18 +30,16 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: '{name} build artefact'
+    display-name: 'Provison {environment} environment.'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
-      - delivery-pipeline:
-          stage: Build
-          task: Build Artefact
       - inject:
           properties-content: |
-            ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
+            ENVIRONMENT={environment}
+            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
     wrappers:
       - ansicolor
     scm:
@@ -52,19 +55,15 @@
     wrappers:
       - ssh-agent-credentials:
             users:
-                - '{app_code_repository_credentials}'
+                - '{platform_code_repository_credentials}'
     builders:
-      - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
-      - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
-      #- shell: !include-raw-escape: build-artefact.sh
+        - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
+        - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
+        - shell: echo "Provisioning environment ${{ENVIRONMENT}}"
+      # - shell: !include-raw-escape: provision-environment.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-provision-{initial_deployment_target}'
+              - '{name}-deploy-to-{initial_deployment_target}'
             current-parameters: true
-            predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
             condition: SUCCESS
-      # - pipeline:
-      #   - project: '{name}-deploy-to-{initial_deployment_target}'
-      #   - current-parameters: true
-      #   - predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
