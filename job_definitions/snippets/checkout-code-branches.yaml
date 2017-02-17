@@ -34,7 +34,7 @@
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-build-artefact'
+              - '{name}-checkout-platform-code'
             predefined-parameters: |
               PIPELINE_NUMBER=${{BUILD_NUMBER}}
               APP_GIT_COMMIT=${{GIT_COMMIT}}

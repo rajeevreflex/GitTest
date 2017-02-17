@@ -1,5 +1,6 @@
+---
 - job-template:
-    name: '{name}-build-artefact'
+    name: '{name}-checkout-platform-code'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -13,19 +14,11 @@
           name: APP_GIT_BRANCH
           default: ""
           description: "The git branch of the VFLEAP repository"
-      - string:
-          name: PLATFORM_RELEASE_COMMIT_ID
-          default: ""
-          description: "The git commit of the latest release in the vfdo-esim-platform repository."
-      - string:
-          name: PLATFORM_RELEASE_BRANCH
-          default: ""
-          description: "The git branch/tag name of the latest release in the vfdo-esim-platform repository."
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: '{name} build artefact'
+    display-name: 'Latest tagged platform code Checkout for {name}'
     node: '{name}'
     properties:
       - build-discarder:
@@ -33,10 +26,7 @@
           num-to-keep: 100
       - delivery-pipeline:
           stage: Build
-          task: Build Artefact
-      - inject:
-          properties-content: |
-            ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
+          task: Checkout Code
     wrappers:
       - ansicolor
     scm:
@@ -44,27 +34,20 @@
           refspec: '{platform_code_repository_refspec}'
           url: '{platform_code_repository_uri}'
           branches:
-            - ${{PLATFORM_RELEASE_BRANCH}}
+            - '{platform_code_repository_branches}'
           credentials-id: '{platform_code_repository_credentials}'
           git-config-name: '{platform_code_repository_display_name}'
           git-config-email: '{platform_code_repository_display_email}'
           timeout: 5
-    wrappers:
-      - ssh-agent-credentials:
-            users:
-                - '{app_code_repository_credentials}'
     builders:
       - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
       - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
-      #- shell: !include-raw-escape: build-artefact.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-deploy-to-{initial_deployment_target}'
+              - '{name}-build-artefact'
             current-parameters: true
-            predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
+            predefined-parameters: |
+              PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
+              PLATFORM_RELEASE_BRANCH=${{GIT_BRANCH}}
             condition: SUCCESS
-      # - pipeline:
-      #   - project: '{name}-deploy-to-{initial_deployment_target}'
-      #   - current-parameters: true
-      #   - predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
