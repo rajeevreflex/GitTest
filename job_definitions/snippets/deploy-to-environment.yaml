@@ -60,10 +60,12 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-        - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
-        - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
-      # - shell: !include-raw-escape: deploy-artefact.sh
+        # - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
+        # - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
+        - shell: !include-raw-escape: deploy-artefact.sh
     publishers:
-      - pipeline:
-          project: '{name}-deploy-to-{next_environment}'
-          current-parameters: true
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-deploy-to-{next_environment}'
+            current-parameters: true
+            condition: SUCCESS
