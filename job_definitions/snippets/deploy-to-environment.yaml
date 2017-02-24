@@ -64,8 +64,7 @@
         # - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
         - shell: !include-raw-escape: deploy-artefact.sh
     publishers:
-      - trigger-parameterized-builds:
-          - project:
-              - '{name}-deploy-to-{next_environment}'
-            current-parameters: true
-            condition: SUCCESS
+      - pipeline:
+        - project: '{name}-provision-{next_environment}'
+        - current-parameters: true
+        - condition: SUCCESS

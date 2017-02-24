@@ -61,7 +61,8 @@
         - shell: echo "Provisioning environment ${{ENVIRONMENT}}"
         - shell: !include-raw-escape: provision-environment.sh
     publishers:
-      - pipeline:
-          - project: '{name}-configure-{initial_deployment_target}'
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-configure-{environment}'
             current-parameters: true
-          
+            condition: SUCCESS
