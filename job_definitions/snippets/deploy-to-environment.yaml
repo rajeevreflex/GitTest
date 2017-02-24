@@ -62,9 +62,9 @@
     builders:
         # - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
         # - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
-        - shell: !include-raw-escape: deploy-artefact.sh
+        - shell: echo "Deploy to environment ${{ENVIRONMENT}}"
+        #- shell: !include-raw-escape: deploy-artefact.sh
     publishers:
       - pipeline:
-        - project: '{name}-provision-{next_environment}'
-        - current-parameters: true
-        - condition: SUCCESS
+          project: '{name}-provision-{next_environment}'
+          current-parameters: true
