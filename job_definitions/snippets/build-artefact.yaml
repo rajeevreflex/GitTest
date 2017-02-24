@@ -56,14 +56,18 @@
     builders:
       - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
       - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
-      #- shell: !include-raw-escape: build-artefact.sh
     publishers:
       - pipeline:
-        - project: '{name}-provision-{initial_deployment_target}'
-        - current-parameters: true
-        - predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
-        - condition: SUCCESS
-      # - pipeline:
-      #   - project: '{name}-deploy-to-{initial_deployment_target}'
-      #   - current-parameters: true
-      #   - predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
+          project: '{name}-provision-{initial_deployment_target}'
+          current-parameters: true
+          predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
+
+      #- shell: !include-raw-escape: build-artefact.sh
+    # publishers:
+    #   - trigger-parameterized-builds:
+    #       - project:
+    #           - '{name}-provision-{initial_deployment_target}'
+    #         current-parameters: true
+    #         predefined-parameters: |
+    #           ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
+    #         condition: SUCCESS

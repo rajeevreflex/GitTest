@@ -51,8 +51,8 @@
       - '{name}-configure-{environment}':
             environment: platformtest
       - '{name}-deploy-to-{environment}':
-          environment: platformtest
-          next_environment: platformtestbeta
+            environment: platformtest
+            next_environment: platformtestbeta
       - '{name}-provision-{environment}':
             environment: platformtestbeta
       - '{name}-configure-{environment}':
