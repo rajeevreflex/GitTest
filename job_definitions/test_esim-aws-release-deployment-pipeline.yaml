@@ -52,11 +52,11 @@
             environment: platformtest
       - '{name}-deploy-to-{environment}':
             environment: platformtest
-            next_environment: platformtestbeta
+            next_environment: platformtestb
       - '{name}-provision-{environment}':
-            environment: platformtestbeta
+            environment: platformtestb
       - '{name}-configure-{environment}':
-            environment: platformtestbeta
+            environment: platformtestb
       - '{name}-deploy-to-{environment}':
-          environment: platformtestbeta
+          environment: platformtestb
           next_environment: none
