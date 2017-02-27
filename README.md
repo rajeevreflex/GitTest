@@ -92,5 +92,15 @@ By making changes in a segregated project we can experiment and make changes wit
 Following the above procedure enable anyone to relate changes in the test pipeline project with those in the production project.
 The GIT branches and releases should be enough information to indicate when changes have been applied.
 
+# Debugging utilities.
+
+Add these two script to the builder part of the snippet/job
+
+```
+builders:
+    - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
+    - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
+```
+
 <!--Photos:-->
 [img]:./zimg/project_branching_release_workflow.jpg
