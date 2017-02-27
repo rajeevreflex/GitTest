@@ -57,8 +57,6 @@
             users:
                 - '{platform_code_repository_credentials}'
     builders:
-        # - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
-        # - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
         - shell: echo "Provisioning environment ${{ENVIRONMENT}}"
         - shell: !include-raw-escape: provision-environment.sh
     publishers:
