@@ -2,6 +2,8 @@
 This repository contains the Test Jenkins Job Builder tasks for the Vodafone LEAP project.
 The purpose of the repository is to test changes to pipeline code and platform (infrastructure) code in isolation.
 
+{{TOC}}
+
 ## What is Jenkins Job Builder?
 
 Jenkins Job Builder (JJB) is a project developed by the OpenStack Community to allow for the storage and tracking of changes to Jenkins Job configurations via standard Source Code Management tooling such as GIT.
@@ -65,3 +67,40 @@ INFO:jenkins_jobs.builder:Creating jenkins job esim-checkout-code
 INFO:root:Number of jobs updated: 1
 INFO:jenkins_jobs.builder:Cache saved
 ```
+
+# JJB Project Workflow
+
+## Procedure
+
+![img]
+
+Procedure to get changes from here **`vfleap/vfleap-esim-test-jenkins-job-builder`** the **test JJB project** into the **`vfleap/vfleap-esim-jenkins-job-builder` Production JJB project**.
+
+1. Create feature branch eg `VFESIM-654_Add_Linting_job` to `vfleap-esim-test-jenkins-job-builder`
+2. Make changes and test in the test pipeline **Test eSIM Deployment Pipeline**.
+3. Update CHANGELOG.md and create a pull request.
+4. When PR is approved create a new **release & tag** eg Release/v4 using util script.
+5. Now create branch on the **`vfleap/vfleap-esim-jenkins-job-builder` Production JJB project** called feature|update/v4.
+6. Copy changes across.
+7. Create pull request.
+8. When PR is approved create a new **release & tag** eg Release/v4 using util script.
+9. Apply JJB code to update pipelines in **`vfleap/vfleap-esim-jenkins-job-builder` Production JJB project**.
+
+## Why?
+
+By making changes in a segregated project we can experiment and make changes without risking problems in the production pipeline.
+Following the above procedure enable anyone to relate changes in the test pipeline project with those in the production project.
+The GIT branches and releases should be enough information to indicate when changes have been applied.
+
+# Debugging utilities.
+
+Add these two script to the builder part of the snippet/job
+
+```
+builders:
+    - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
+    - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
+```
+
+<!--Photos:-->
+[img]:./zimg/project_branching_release_workflow.jpg

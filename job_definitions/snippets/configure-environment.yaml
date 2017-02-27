@@ -1,5 +1,6 @@
+---
 - job-template:
-    name: '{name}-deploy-to-{environment}'
+    name: '{name}-configure-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -29,16 +30,12 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Deploy {name} to {environment} environment'
+    display-name: 'Configure {environment} environment for {name}.'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
-      - delivery-pipeline:
-          stage: Deploy
-          task: Deploy to {environment}
-          description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
             ENVIRONMENT={environment}
@@ -58,11 +55,13 @@
     wrappers:
       - ssh-agent-credentials:
             users:
-                - '{app_code_repository_credentials}'
+                - '{platform_code_repository_credentials}'
     builders:
-        - shell: echo "Deploy to environment ${{ENVIRONMENT}}"
-        - shell: !include-raw-escape: deploy-artefact.sh
+        - shell: echo "Configure environment ${{ENVIRONMENT}}"
+        - shell: !include-raw-escape: configure-environment.sh
     publishers:
-      - pipeline:
-          project: '{name}-provision-{next_environment}'
-          current-parameters: true
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-deploy-to-{environment}'
+            current-parameters: true
+            condition: SUCCESS

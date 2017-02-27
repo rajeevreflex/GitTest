@@ -19,6 +19,16 @@ Group changes to describe their impact on the project, as follows:
 
 ### Fixed
 
+## [v3] - 2017-02-27
+### Added
+- provision-environment step as first stage in updating environment.
+- configure-environment step as second stage in updating environment.
+
+### Changed
+- Made provision-environment the stage that requires manual start (was deploy-to-environment).
+- Made deploy-to-environment the third and final stage in updating environment.
+- Changed branches pipeline to include the two new jobs as main pipeline.
+
 ## [v2] - 2017-02-20
 
 ### Changed
@@ -32,8 +42,10 @@ Group changes to describe their impact on the project, as follows:
 - Added two logging debug scripts.
 - Updated checkout-code-branches.yaml to use '{name}-checkout-platform-code' as next job.
 
-[Unreleased]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v2&sourceBranch=refs%2Fheads%2Fmaster&targetRepoId=324
+[Unreleased]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v3&sourceBranch=refs%2Fheads%2Fmaster&targetRepoId=324
+
+[v1]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v1&sourceBranch=refs%2Ftags%2FRelease-v1&targetRepoId=324
 
 [v2]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v1&sourceBranch=refs%2Ftags%2FRelease-v2&targetRepoId=324
 
-[v1]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v1&sourceBranch=refs%2Ftags%2FRelease-v1&targetRepoId=324
+[v3]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v2&sourceBranch=refs%2Ftags%2FRelease-v3&targetRepoId=324
