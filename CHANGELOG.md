@@ -19,7 +19,17 @@ Group changes to describe their impact on the project, as follows:
 
 ### Fixed
 
-## v1 - 2017-02-17
+## v3 - 2017-02-27
+### Added
+- provision-environment step as first stage in updating environment.
+- configure-environment step as second stage in updating environment.
+
+### Changed
+- Made provision-environment the stage that requires manual start (was deploy-to-environment).
+- Made deploy-to-environment the third and final stage in updating environment.
+- Changed branches pipeline to include the two new jobs as main pipeline.
+
+## v2 - 2017-02-17
 ### Added
 - This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
 - Refactor the pipeline variable name config_code_* to platform_code_*
