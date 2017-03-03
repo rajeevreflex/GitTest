@@ -42,6 +42,7 @@
     workspace_clone_glob: 'LEAP/**'
     js_app_file: vfleap.js
     repo_language: nodejs
+    nodejs_version: 6.9.1
     jobs:
       - '{name}-checkout-code-master'
       - '{name}-checkout-platform-code'
