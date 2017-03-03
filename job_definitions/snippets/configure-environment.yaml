@@ -40,6 +40,7 @@
           properties-content: |
             ENVIRONMENT={environment}
             ARTEFACT_VERSION={{ARTEFACT_VERSION}}
+            PLAYBOOK={playbook}
     wrappers:
       - ansicolor
     scm:
@@ -58,6 +59,7 @@
                 - '{platform_code_repository_credentials}'
     builders:
         - shell: echo "Configure environment ${{ENVIRONMENT}}"
+        - shell: echo "Using Ansible playbook - ${{PLAYBOOK}}"
         - shell: !include-raw-escape: configure-environment.sh
     publishers:
       - trigger-parameterized-builds:
