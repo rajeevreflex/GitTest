@@ -38,4 +38,4 @@
       - '{name}-rebase-on-master'
       - '{name}-nodejs-eslint'
       - '{name}-nodejs-unittest'
-      - '{name}-merge-to-master'
+      #- '{name}-merge-to-master'

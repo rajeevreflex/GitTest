@@ -11,5 +11,7 @@ cd $CODE_PATH
 ### NODE JS can't read the SSL cert on the proxy
 export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 #npm config set registry='http://registry.npmjs.org/'
+nvm install "${NODEJS_VERSION}"
+nvm use "${NODEJS_VERSION}"
 npm install
 npm install grunt
