@@ -16,6 +16,8 @@ Group changes to describe their impact on the project, as follows:
 ### Added
 
 ### Changed
+- NodeJS version specified in pipeline defintion files.
+- NodeJS version installed with [NVM])https://github.com/creationix/nvm) and set to use when lint and test jobs run in app code pipeline.
 
 ### Fixed
 
