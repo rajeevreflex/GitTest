@@ -17,4 +17,5 @@ node --version
 
 ### and run ESLint
 ### || : appended to return successfully to force jenkins to continue.
-npm run lint || :
+#npm run lint || :
+npm run lint
