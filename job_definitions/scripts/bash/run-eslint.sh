@@ -12,6 +12,9 @@ JS_APP_FILE="${JS_APP_FILE}"
 
 cd "${CODE_PATH}" || exit 1
 
+echo "Running Node version: ${NODEJS_VERSION}"
+node --version
+
 ### and run ESLint
 ### || : appended to return successfully to force jenkins to continue.
 npm run lint || :
