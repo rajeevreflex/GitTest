@@ -19,6 +19,10 @@ Group changes to describe their impact on the project, as follows:
 
 ### Fixed
 
+## [v5] - 2017-03-07
+### Added
+- Added parameters to display code branch and commit id in Jenkins pipeline header for App Code Pipeline.
+
 ## [v4] - 2017-03-07
 ### Changed
 - NodeJS version specified in pipeline defintion files.
@@ -49,6 +53,8 @@ Group changes to describe their impact on the project, as follows:
 - Updated checkout-code-branches.yaml to use '{name}-checkout-platform-code' as next job.
 
 [Unreleased]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v4&sourceBranch=refs%2Fheads%2Fmaster&targetRepoId=324
+
+[v5]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v4&sourceBranch=refs%2Ftags%2FRelease-v5&targetRepoId=324
 
 [v4]: https://platform.devops.vodafone.com/stash/projects/VFLEAP/repos/vfleap-esim-test-jenkins-job-builder/compare/diff?targetBranch=refs%2Ftags%2FRelease-v3&sourceBranch=refs%2Ftags%2FRelease-v4&targetRepoId=324
 

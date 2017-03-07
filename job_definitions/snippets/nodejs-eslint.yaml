@@ -1,6 +1,19 @@
 ---
 - job-template:
     name: '{name}-nodejs-eslint'
+    parameters:
+      - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
@@ -30,6 +43,8 @@
             JS_APP_FILE={js_app_file}
             NODEJS_VERSION={nodejs_version}
       - shell: echo "======= Using NodeJS version -- $NODEJS_VERSION ======="
+      - shell: echo "======= Commit -- $GIT_COMMIT ======="
+      - shell: echo "======= Branch -- $GIT_BRANCH ======="
       - shell: !include-raw-escape: install-nodejs-deps.sh
       - shell: !include-raw-escape: run-eslint.sh
     publishers:
