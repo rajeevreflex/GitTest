@@ -51,6 +51,7 @@
             environment: platformtest
       - '{name}-configure-{environment}':
             environment: platformtest
+            playbook: test.yml
       - '{name}-deploy-to-{environment}':
             environment: platformtest
             next_environment: platformtestb
@@ -58,6 +59,7 @@
             environment: platformtestb
       - '{name}-configure-{environment}':
             environment: platformtestb
+            playbook: test.yml
       - '{name}-deploy-to-{environment}':
           environment: platformtestb
           next_environment: none
