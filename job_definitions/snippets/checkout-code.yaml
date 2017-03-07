@@ -37,6 +37,10 @@
           - project:
               - '{name}-rebase-on-master'
             current-parameters: true
+            predefined-parameters: |
+              PIPELINE_NUMBER=${{BUILD_NUMBER}}
+              APP_GIT_COMMIT=${{GIT_COMMIT}}
+              APP_GIT_BRANCH=${{GIT_BRANCH}}
             git-revision: true
             condition: SUCCESS
             node-label: '{name}'
