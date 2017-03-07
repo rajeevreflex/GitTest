@@ -14,6 +14,7 @@ Group changes to describe their impact on the project, as follows:
 
 ## [Unreleased]
 ### Added
+- Added parameters to display code branch and commit id in Jenkins pipeline header.
 
 ### Changed
 
