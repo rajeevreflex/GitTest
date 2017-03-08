@@ -1,17 +1,17 @@
 ---
-#### This file contains the build pipeline for the eSIM LEAP Management Infrastructure.
+#### This file contains the build pipeline for the eSIM LEAP access and logging Infrastructure.
 ## The Pipeline view values:
 #     Name:
-#         "Test eSIM Build Management VPC Pipeline"
+#         "Test eSIM Build Access and Logging VPC Pipeline"
 #     Description:
 #         ""
 #     Build Pipeline View Title:
-#         "Test eSIM Build Management VPC Pipeline"
+#         "Test eSIM Build Access and Logging VPC Pipeline"
 
 # You should create one project per product and link all the steps
 
 - project:
-    name: test_esim-build-management-vpc-pipeline
+    name: test_esim-build-access-logging-vpc-pipeline
     disabled: false
     platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
     platform_code_repository_display_name: eSIM Jenkins

@@ -9,9 +9,9 @@
 #### Changed
 #### Fixed
 
-### Management Terraform
+### Access Logging Terraform
 #### Added
-- Management VPC build and configure pipeline
+- Access logging VPC build and configure pipeline
 #### Changed
 #### Fixed
 
