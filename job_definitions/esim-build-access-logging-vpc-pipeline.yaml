@@ -37,4 +37,4 @@
             environment: access_logging_production
       - '{name}-configure-{environment}':
             environment: access_logging_production
-            playbook: test.yml
+            playbook: test-access-logging-vpc.yml
