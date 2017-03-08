@@ -30,11 +30,11 @@
     # useful for testing platform code from master head
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
     # platform_code_repository_branches: origin/master
-    initial_deployment_target: access_logging_production
+    initial_deployment_target: altest
     jobs:
       - '{name}-checkout-platform-code'
       - '{name}-provision-{environment}':
-            environment: access_logging_production
+            environment: altest
       - '{name}-configure-{environment}':
-            environment: access_logging_production
+            environment: altest
             playbook: test-access-logging-vpc.yml
