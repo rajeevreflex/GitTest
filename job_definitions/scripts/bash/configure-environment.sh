@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #
 ###
-./run --ansible --environment "${ENVIRONMENT}" -y
+./run --ansible --playbook "${PLAYBOOK}" --environment "${ENVIRONMENT}" -y

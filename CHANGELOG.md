@@ -16,6 +16,7 @@ Group changes to describe their impact on the project, as follows:
 ### Added
 
 ### Changed
+- Ability to specify Ansible playbook in job.
 
 ### Fixed
 
