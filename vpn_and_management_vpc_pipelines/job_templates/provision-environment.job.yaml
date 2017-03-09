@@ -45,8 +45,7 @@
                 - '{platform_code_repository_credentials}'
     builders:
         - shell: echo "Provisioning environment ${{ENVIRONMENT}}"
-        - shell: ./run --apply --environment "${ENVIRONMENT}" -y
-        #- shell: !include-raw-escape: provision-environment.sh
+        - shell: !include-raw-escape: provision-environment.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
