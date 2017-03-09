@@ -24,12 +24,12 @@
     # platform_code_repository_branches: origin/tags/Release-*
     #
     ## useful for testing platform code from a branch
-    platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: feature/FreeIPA_post_release2.0.0
+    # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+    # platform_code_repository_branches: feature/FreeIPA_post_release2.0.0
     #
     # useful for testing platform code from master head
-    # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    # platform_code_repository_branches: origin/master
+    platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+    platform_code_repository_branches: origin/master
     environment: vpn_gemalto_non_production
     jobs:
       - '{name}-checkout-platform-code'
