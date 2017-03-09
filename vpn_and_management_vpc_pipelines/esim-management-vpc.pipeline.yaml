@@ -2,11 +2,11 @@
 #### This file contains the build pipeline for the eSIM LEAP access and logging Infrastructure.
 ## The Pipeline view values:
 #     Name:
-#         "Test eSIM Build Access and Logging VPC Pipeline"
+#         "Test eSIM Management VPC Pipeline"
 #     Description:
 #         ""
 #     Build Pipeline View Title:
-#         "Test eSIM Build Access and Logging VPC Pipeline"
+#         "Test eSIM Management VPC Pipeline"
 
 # You should create one project per product and link all the steps
 
@@ -35,4 +35,5 @@
       - '{name}-checkout-platform-code'
       - '{name}-provision-{environment}'
       - '{name}-configure-{environment}':
-            playbook: test-access-logging-vpc.yml
+            playbook: freeipa.yml
+            # playbook: test-access-logging-vpc.yml

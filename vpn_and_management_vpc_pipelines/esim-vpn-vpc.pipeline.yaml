@@ -2,11 +2,11 @@
 #### This file contains the build pipeline for the eSIM LEAP VPN Infrastructure.
 ## The Pipeline view values:
 #     Name:
-#         "Test eSIM Build VPN VPC Pipeline"
+#         "Test eSIM VPN VPC Pipeline"
 #     Description:
 #         ""
 #     Build Pipeline View Title:
-#         "Test eSIM Build VPN VPC Pipeline"
+#         "Test eSIM VPN VPC Pipeline"
 
 # You should create one project per product and link all the steps
 
