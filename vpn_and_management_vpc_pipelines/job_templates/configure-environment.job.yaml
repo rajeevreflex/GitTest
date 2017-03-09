@@ -47,7 +47,8 @@
     builders:
         - shell: echo "Configure environment ${{ENVIRONMENT}}"
         - shell: echo "Using Ansible playbook - ${{PLAYBOOK}}"
-        - shell: !include-raw-escape: configure-environment.sh
+        - shell: ./run --ansible --playbook "${PLAYBOOK}" --environment "${ENVIRONMENT}" -y
+        #- shell: !include-raw-escape: configure-environment.sh
     # publishers:
     #   - trigger-parameterized-builds:
     #       - project:
