@@ -35,5 +35,5 @@
       - '{name}-checkout-platform-code'
       - '{name}-provision-{environment}'
       - '{name}-configure-{environment}':
-            playbook: freeipa.yml
+            playbook: freeipa-master.yml
             # playbook: test-access-logging-vpc.yml
