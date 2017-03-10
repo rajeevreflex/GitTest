@@ -7,18 +7,6 @@
           default: ""
           description: "The BUILD_NUMBER of first job in the pipeline"
       - string:
-          name: APP_GIT_COMMIT
-          default: ""
-          description: "The git commit of the VFLEAP repository"
-      - string:
-          name: APP_GIT_BRANCH
-          default: ""
-          description: "The git branch of the VFLEAP repository"
-      - string:
-          name: ARTEFACT_VERSION
-          default: ""
-          description: "The artefact version to deploy"
-      - string:
           name: PLATFORM_RELEASE_COMMIT_ID
           default: ""
           description: "The git commit of the latest release in the vfdo-esim-platform repository."
@@ -29,8 +17,9 @@
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
-    disabled: false
-    display-name: 'Provison {environment} environment for {name}.'
+    # job disabled as we need to run ansible after making manual changes to hit deadline :(
+    disabled: true
+    display-name: '{name}-provision-{environment}'
     node: '{name}'
     properties:
       - build-discarder:

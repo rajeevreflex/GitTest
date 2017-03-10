@@ -61,6 +61,7 @@
                 - '{app_code_repository_credentials}'
     builders:
         - shell: echo "Deploy to environment ${{ENVIRONMENT}}"
+        - shell: echo "Deploy to environment ${{ARTEFACT_VERSION}}"
         - shell: !include-raw-escape: deploy-artefact.sh
     publishers:
       - pipeline:

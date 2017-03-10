@@ -58,7 +58,7 @@
             environment: platformtestb
       - '{name}-configure-{environment}':
             environment: platformtestb
-            playbook: test.yml
+            playbook: temp-openldap.yml
       - '{name}-deploy-to-{environment}':
           environment: platformtestb
           next_environment: none

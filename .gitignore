@@ -4,5 +4,6 @@
 
 # Don't include any JJB personal configuration
 **/jenkins_jobs.ini
+**/vpn_and_management_vpc_pipelines.ini
 .DS_Store
 venv/
