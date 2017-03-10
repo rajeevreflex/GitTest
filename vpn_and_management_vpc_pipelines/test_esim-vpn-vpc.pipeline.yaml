@@ -29,7 +29,7 @@
     #
     # useful for testing platform code from master head
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/master
+    platform_code_repository_branches: origin/feature/VFESIM-515_Update_CIDR_172_range_VFESIM-525_Update_vpn_vpc_config_names
     environment: vpnvpctest
     jobs:
       - '{name}-checkout-platform-code'

@@ -2,11 +2,11 @@
 #### This file contains the build pipeline for the eSIM LEAP access and logging Infrastructure.
 ## The Pipeline view values:
 #     Name:
-#         "eSIM Non Production Management VPC Pipeline"
+#         "eSIM Production Management VPC Pipeline"
 #     Description:
 #         ""
 #     Build Pipeline View Title:
-#         "eSIM Non Production Management VPC Pipeline"
+#         "eSIM Production Management VPC Pipeline"
 
 # You should create one project per product and link all the steps
 
