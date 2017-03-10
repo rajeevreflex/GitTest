@@ -17,8 +17,7 @@
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
-    # job disabled as we need to run ansible after making manual changes to hit deadline :(
-    disabled: true
+    disabled: false
     display-name: '{name}-provision-{environment}'
     node: '{name}'
     properties:
