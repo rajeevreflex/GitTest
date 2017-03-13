@@ -28,7 +28,7 @@
     ## An attempt to get dev, systemtest and staging rebuilt with updated
     ## CIDR ranges over weekend.
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/feature/VFESIM-515_Update_CIDR_172_range_VFESIM-525_Update_vpn_vpc_config_names
+    platform_code_repository_branches: origin/integration/VFESIM-277_FreeIPA_gateway_fix
     environment: alnonproduction
     jobs:
       - '{name}-checkout-platform-code'
