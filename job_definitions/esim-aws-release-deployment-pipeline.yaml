@@ -32,7 +32,7 @@
     ## An attempt to get dev, systemtest and staging rebuilt with updated
     ## CIDR ranges over weekend.
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/integration/EAP-6133_new_pipeline_prerelease
+    platform_code_repository_branches: origin/integration/EAP-6133_new_pipeline_prerelease_test
     #
     # useful for testing platform code from master head
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
@@ -54,18 +54,18 @@
       - '{name}-checkout-platform-code'
       - '{name}-build-artefact'
       - '{name}-provision-{environment}':
-            environment: platformtest
+            environment: platformtestc
       - '{name}-configure-{environment}':
-            environment: platformtest
+            environment: platformtestc
             playbook: temp-openldap.yml
       - '{name}-deploy-to-{environment}':
-            environment: platformtest
-            next_environment: platformtestb
+            environment: platformtestc
+            next_environment: platformtestd
       - '{name}-provision-{environment}':
-            environment: platformtestb
+            environment: platformtestd
       - '{name}-configure-{environment}':
-            environment: platformtestb
+            environment: platformtestd
             playbook: temp-openldap.yml
       - '{name}-deploy-to-{environment}':
-          environment: platformtestb
+          environment: platformtestd
           next_environment: none
