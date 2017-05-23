@@ -36,8 +36,8 @@
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Deploy
-          task: Deploy to {environment}
+          stage: Test
+          task: Testing {environment}
           description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
