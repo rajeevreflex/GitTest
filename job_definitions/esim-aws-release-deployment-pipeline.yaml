@@ -45,7 +45,7 @@
     app_code_repository_type: git
     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
     artefact_version_prefix: T
-    initial_deployment_target: platformtestd
+    initial_deployment_target: platformtestb
     workspace_clone_glob: 'LEAP/**'
     js_app_file: vfleap.js
     repo_language: nodejs
@@ -55,22 +55,22 @@
       - '{name}-checkout-platform-code'
       - '{name}-build-artefact'
       - '{name}-provision-{environment}':
-            environment: platformtestd
+            environment: platformtestb
       - '{name}-configure-{environment}':
-            environment: platformtestd
+            environment: platformtestb
             playbook: test.yml
       - '{name}-deploy-to-{environment}':
-            environment: platformtestd
+            environment: platformtestb
       - '{name}-test-{environment}':
-            environment: platformtestd
-            next_environment: platformteste
+            environment: platformtestb
+            next_environment: platformtestc
       - '{name}-provision-{environment}':
-            environment: platformteste
+            environment: platformtestc
       - '{name}-configure-{environment}':
-            environment: platformteste
+            environment: platformtestc
             playbook: test.yml
       - '{name}-deploy-to-{environment}':
-            environment: platformteste
+            environment: platformtestc
       - '{name}-test-{environment}':
-            environment: platformteste
+            environment: platformtestc
             next_environment: none
