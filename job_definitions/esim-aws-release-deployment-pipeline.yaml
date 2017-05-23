@@ -56,16 +56,26 @@
       - '{name}-provision-{environment}':
             environment: platformtestc
       - '{name}-configure-{environment}':
+<<<<<<< HEAD
             environment: platformtestc
             playbook: temp-openldap.yml
+=======
+            environment: platformtest
+            playbook: test.yml
+>>>>>>> fe6f44e4d6a8c76f46c1fcafbd6d7acef97152e1
       - '{name}-deploy-to-{environment}':
             environment: platformtestc
             next_environment: platformtestd
       - '{name}-provision-{environment}':
             environment: platformtestd
       - '{name}-configure-{environment}':
+<<<<<<< HEAD
             environment: platformtestd
             playbook: temp-openldap.yml
+=======
+            environment: platformtestb
+            playbook: test.yml
+>>>>>>> fe6f44e4d6a8c76f46c1fcafbd6d7acef97152e1
       - '{name}-deploy-to-{environment}':
           environment: platformtestd
           next_environment: none
