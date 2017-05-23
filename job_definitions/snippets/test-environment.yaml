@@ -29,7 +29,7 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Deploy {name} to {environment} environment'
+    display-name: 'Test {name} on {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
