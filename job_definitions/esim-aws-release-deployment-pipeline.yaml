@@ -60,6 +60,8 @@
             playbook: test.yml
       - '{name}-deploy-to-{environment}':
             environment: platformtestc
+      - '{name}-test-{environment}':
+            environment: platformtestc
             next_environment: platformtestd
       - '{name}-provision-{environment}':
             environment: platformtestd
@@ -67,5 +69,7 @@
             environment: platformtestd
             playbook: test.yml
       - '{name}-deploy-to-{environment}':
+            environment: platformtestd
+      - '{name}-test-{environment}':
             environment: platformtestd
             next_environment: none

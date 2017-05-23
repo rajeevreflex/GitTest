@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-deploy-to-{environment}'
+    name: '{name}-test-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -60,12 +60,9 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-        - shell: echo "Deploy to environment ${{ENVIRONMENT}}"
-        - shell: echo "Deploy to environment ${{ARTEFACT_VERSION}}"
-        - shell: !include-raw-escape: deploy-artefact.sh
+        - shell: echo "Testing environment ${{ENVIRONMENT}}"
+        - shell: !include-raw-escape: test-artefact.sh
     publishers:
-      - trigger-parameterized-builds:
-          - project:
-              - '{name}-test-{environment}'
-            current-parameters: true
-            condition: SUCCESS
+      - pipeline:
+          project: '{name}-provision-{next_environment}'
+          current-parameters: true
