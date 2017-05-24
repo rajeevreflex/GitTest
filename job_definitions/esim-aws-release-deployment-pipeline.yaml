@@ -34,7 +34,8 @@
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
     #platform_code_repository_branches: origin/integration/EAP-6133_new_pipeline_prerelease_test
     #platform_code_repository_branches: origin/fix/integration/EAP-6133_new_pipeline_prerelease_test
-    platform_code_repository_branches: origin/fix/integration/EAP-6133_new_pipeline_prerelease_test_ssl_cert_issue
+    #platform_code_repository_branches: origin/fix/integration/EAP-6133_new_pipeline_prerelease_test_ssl_cert_issue
+    platform_code_repository_branches: origin/integration/EAP-6133_new_pipeline_prerelease_test_peering
     #
     # useful for testing platform code from master head
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
