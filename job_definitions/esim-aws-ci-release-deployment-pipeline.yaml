@@ -27,12 +27,7 @@
     ## useful for testing platform code from a branch
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
     # platform_code_repository_branches: origin/deploy_platformtest_env
-    ## Two lines below set as work around because we can't push to master
-    ## without PR.
-    ## An attempt to get dev, systemtest and staging rebuilt with updated
-    ## CIDR ranges over weekend.
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    #platform_code_repository_branches: origin/integration/EAP-6133_new_pipeline_prerelease_test
     platform_code_repository_branches: origin/fix/integration/EAP-6133_new_pipeline_prerelease_test
     #
     # useful for testing platform code from master head
