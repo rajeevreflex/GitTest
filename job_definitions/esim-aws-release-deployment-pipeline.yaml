@@ -39,7 +39,8 @@
     #platform_code_repository_branches: origin/integration/EAP-6133_new_pipeline_prerelease_test_remove_opco_s3_buckets_and_ldap_value_injections
     #platform_code_repository_branches: origin/feature/EAP-3637_Custom_Domain_Setup_for_eSIM
     #platform_code_repository_branches: origin/feature/EAP-3637_Custom_Domain_Setup_for_eSIM_Jenkins_wake_up
-    platform_code_repository_branches: origin/integration/EAP-6269_Integration_Diagnosis_and_fix
+    #platform_code_repository_branches: origin/integration/EAP-6269_Integration_Diagnosis_and_fix
+    platform_code_repository_branches: origin/integration/EAP-6269_Integration_Diagnosis_and_fix_EAP-6293_api-base-mapping
     #
     # useful for testing platform code from master head
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
