@@ -28,7 +28,7 @@
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
     # platform_code_repository_branches: origin/deploy_platformtest_env
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/release/3.3.1
+    platform_code_repository_branches: origin/release/3.3.2
     #
     # useful for testing platform code from master head
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
