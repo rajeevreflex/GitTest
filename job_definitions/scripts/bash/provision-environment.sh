@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 #
 ###
-./run --apply --environment "${ENVIRONMENT}" -y
+
+## INFO: EAP-6423 This conditional is a temporary measure put in place
+## due to "uata" as "ciuata" used for DE testing needs to be preserved.
+## Here we keep "ciuata" place in the pipeline but take no action, so that
+## pipeline view and job history is kept intact.
+if [[ "${ENVIRONMENT}" != "ciuata" ]]; then
+  ./run --apply --environment "${ENVIRONMENT}" -y
+fi
