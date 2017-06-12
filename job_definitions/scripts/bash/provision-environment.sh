@@ -8,4 +8,17 @@
 ## pipeline view and job history is kept intact.
 if [[ "${ENVIRONMENT}" != "ciuata" ]]; then
   ./run --apply --environment "${ENVIRONMENT}" -y
+
+
+  ## This is a tactical workaround:
+  ## Problem: When Terraform is run a second time it break the routing tables.
+  ## and repairs it on the next run.
+  ## So we shall run Terraform twice until we have identified a fix for this
+  ## Terraform bug.
+  echo "Sleeping 5 mins before provisioning to work around."
+  sleep 300
+  ./run --apply --environment "${ENVIRONMENT}" -y
+
+  echo "Sleeping 5 mins before continuing to work around."
+  sleep 300
 fi
