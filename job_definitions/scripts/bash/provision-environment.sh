@@ -8,6 +8,10 @@
 ## pipeline view and job history is kept intact.
 if [[ "${ENVIRONMENT}" != "ciuata" ]]; then
   ./run --apply --environment "${ENVIRONMENT}" -y
+  if [[ ${?} -eq 1 ]]; then
+    echo -e "ERROR: Environment ${ENVIRONMENT} failed" >&2 && \
+    exit 1
+  fi
 
 
   ## This is a tactical workaround:
@@ -18,6 +22,10 @@ if [[ "${ENVIRONMENT}" != "ciuata" ]]; then
   echo "Sleeping 5 mins before provisioning to work around."
   sleep 300
   ./run --apply --environment "${ENVIRONMENT}" -y
+  if [[ ${?} -eq 1 ]]; then
+    echo -e "ERROR: Environment ${ENVIRONMENT} failed" >&2 && \
+    exit 1
+  fi
 
   echo "Sleeping 5 mins before continuing to work around."
   sleep 300
