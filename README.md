@@ -104,3 +104,52 @@ builders:
 
 <!--Photos:-->
 [img]:./zimg/project_branching_release_workflow.jpg
+
+
+# Pipeline View
+
+https://platform.devops.vodafone.com/jenkins/
+ Create new View.
+ https://platform.devops.vodafone.com/jenkins/newView
+
+ Paste in view name from comments in pipeline.yaml
+ eg
+ eSIM Production CI Pipeline
+
+ radio button "Build Pipeline View" then "OK"
+
+ in following form enter the same into the "Build Pipeline View Title" text box.
+
+ in "Selct initial job" look in drop down for "Code Checkout for (project name) Master branch"
+
+ No Of Displayed Builds -- 200
+ Restrict triggers to most recent successful builds	YesNo	Help for feature: Restrict triggers to most recent successful builds
+ 	Always allow manual trigger on pipeline steps	YesNo	Help for feature: Always allow manual trigger on pipeline steps
+ 	Show pipeline project headers	YesNo	Help for feature: Show pipeline project headers
+ 	Show pipeline parameters in project headers	YesNo	Help for feature: Show pipeline parameters in project headers
+ 	Show pipeline parameters in revision box	YesNo
+
+  Refresh frequency (in seconds) -- 10
+
+  Save.
+
+  Then add to node.
+  https://platform.devops.vodafone.com/jenkins/
+  https://platform.devops.vodafone.com/jenkins/manage
+  Manage Nodes -- https://platform.devops.vodafone.com/jenkins/computer
+
+  Click on node name (esim-buildslave01) in this case.
+  https://platform.devops.vodafone.com/jenkins/computer/esim-buildslave01/
+
+  Click on configure
+  https://platform.devops.vodafone.com/jenkins/computer/esim-buildslave01/configure
+
+  add name of (project name to beginning of line (esim-ci-a)) to "Labels"
+  save
+
+  Go to home page https://platform.devops.vodafone.com/jenkins/
+
+  Look for new pipeline in tabs
+  https://platform.devops.vodafone.com/jenkins/view/eSIM%20Production%20CI%20Pipeline/
+
+  It might already be running. Or try a manual kick off.

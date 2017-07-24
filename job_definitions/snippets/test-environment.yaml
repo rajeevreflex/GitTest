@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-deploy-to-{environment}'
+    name: '{name}-test-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -29,15 +29,15 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Deploy {name} to {environment} environment'
+    display-name: 'Test {name} on {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Deploy
-          task: Deploy to {environment}
+          stage: Test
+          task: Testing {environment}
           description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
@@ -60,12 +60,9 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-        - shell: echo "Deploy to environment ${{ENVIRONMENT}}"
-        - shell: echo "Deploy to environment ${{ARTEFACT_VERSION}}"
-        - shell: !include-raw-escape: deploy-artefact.sh
+        - shell: echo "Testing environment ${{ENVIRONMENT}}"
+        - shell: !include-raw-escape: test-artefact.sh
     publishers:
-      - trigger-parameterized-builds:
-          - project:
-              - '{name}-test-{environment}'
-            current-parameters: true
-            condition: SUCCESS
+      - pipeline:
+          project: '{name}-provision-{next_environment}'
+          current-parameters: true

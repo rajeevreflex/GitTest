@@ -16,7 +16,7 @@
     disabled: false
     platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
     platform_code_repository_display_name: eSIM Jenkins
-    platform_code_repository_display_email: vodafone-devops-internal@devopsguys.com
+    platform_code_repository_display_email: vfdo@ubiquedigital.com
     platform_code_repository_name: vfdo-esim-platform
     platform_code_repository_type: git
     platform_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git
@@ -32,14 +32,14 @@
     ## An attempt to get dev, systemtest and staging rebuilt with updated
     ## CIDR ranges over weekend.
     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/integration/VFESIM-277_FreeIPA_gateway_fix
+    platform_code_repository_branches: origin/feature/EAP-5084_Secure_connection_between_APIgateway_and_ElasticBeanstalk
     #
     # useful for testing platform code from master head
     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
     # platform_code_repository_branches: origin/master
     app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
     app_code_repository_display_name: eSIM Jenkins
-    app_code_repository_display_email: vodafone-devops-internal@devopsguys.com
+    app_code_repository_display_email: vfdo@ubiquedigital.com
     app_code_repository_name: vfleap
     app_code_repository_type: git
     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
@@ -57,15 +57,19 @@
             environment: platformtest
       - '{name}-configure-{environment}':
             environment: platformtest
-            playbook: temp-openldap.yml
+            playbook: test.yml
       - '{name}-deploy-to-{environment}':
+            environment: platformtest
+      - '{name}-test-{environment}':
             environment: platformtest
             next_environment: platformtestb
       - '{name}-provision-{environment}':
             environment: platformtestb
       - '{name}-configure-{environment}':
             environment: platformtestb
-            playbook: temp-openldap.yml
+            playbook: test.yml
       - '{name}-deploy-to-{environment}':
-          environment: platformtestb
-          next_environment: none
+            environment: platformtestb
+      - '{name}-test-{environment}':
+            environment: platformtestb
+            next_environment: none
