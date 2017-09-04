@@ -76,54 +76,55 @@
             environment: cipt
       - '{name}-test-{environment}':
             environment: cipt
-            next_environment: ciuata
-      - '{name}-provision-{environment}':
-            environment: ciuata
-      - '{name}-configure-{environment}':
-            environment: ciuata
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-            environment: ciuata
-      - '{name}-test-{environment}':
-            environment: ciuata
-            next_environment: ciuatb
-      - '{name}-provision-{environment}':
-            environment: ciuatb
-      - '{name}-configure-{environment}':
-            environment: ciuatb
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-            environment: ciuatb
-      - '{name}-test-{environment}':
-            environment: ciuatb
-            next_environment: ciuatc
-      - '{name}-provision-{environment}':
-            environment: ciuatc
-      - '{name}-configure-{environment}':
-            environment: ciuatc
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-            environment: ciuatc
-      - '{name}-test-{environment}':
-            environment: ciuatc
-            next_environment: cipreprod
-      - '{name}-provision-{environment}':
-            environment: cipreprod
-      - '{name}-configure-{environment}':
-            environment: cipreprod
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-            environment: cipreprod
-      - '{name}-test-{environment}':
-            environment: cipreprod
-            next_environment: ciproduction
-      - '{name}-provision-{environment}':
-            environment: ciproduction
-      - '{name}-configure-{environment}':
-            environment: ciproduction
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-            environment: ciproduction
-      - '{name}-test-{environment}':
-            environment: ciproduction
             next_environment: none
+      #       next_environment: ciuata
+      # - '{name}-provision-{environment}':
+      #       environment: ciuata
+      # - '{name}-configure-{environment}':
+      #       environment: ciuata
+      #       playbook: test.yml
+      # - '{name}-deploy-to-{environment}':
+      #       environment: ciuata
+      # - '{name}-test-{environment}':
+      #       environment: ciuata
+      #       next_environment: ciuatb
+      # - '{name}-provision-{environment}':
+      #       environment: ciuatb
+      # - '{name}-configure-{environment}':
+      #       environment: ciuatb
+      #       playbook: test.yml
+      # - '{name}-deploy-to-{environment}':
+      #       environment: ciuatb
+      # - '{name}-test-{environment}':
+      #       environment: ciuatb
+      #       next_environment: ciuatc
+      # - '{name}-provision-{environment}':
+      #       environment: ciuatc
+      # - '{name}-configure-{environment}':
+      #       environment: ciuatc
+      #       playbook: test.yml
+      # - '{name}-deploy-to-{environment}':
+      #       environment: ciuatc
+      # - '{name}-test-{environment}':
+      #       environment: ciuatc
+      #       next_environment: cipreprod
+      # - '{name}-provision-{environment}':
+      #       environment: cipreprod
+      # - '{name}-configure-{environment}':
+      #       environment: cipreprod
+      #       playbook: test.yml
+      # - '{name}-deploy-to-{environment}':
+      #       environment: cipreprod
+      # - '{name}-test-{environment}':
+      #       environment: cipreprod
+      #       next_environment: ciproduction
+      # - '{name}-provision-{environment}':
+      #       environment: ciproduction
+      # - '{name}-configure-{environment}':
+      #       environment: ciproduction
+      #       playbook: test.yml
+      # - '{name}-deploy-to-{environment}':
+      #       environment: ciproduction
+      # - '{name}-test-{environment}':
+      #       environment: ciproduction
+      #       next_environment: none
