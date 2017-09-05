@@ -16,54 +16,54 @@
 #
 # #################################
 
-- project:
-    name: test_esim-aws-branches
-    disabled: true
-    platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
-    platform_code_repository_display_name: eSIM Jenkins
-    platform_code_repository_display_email: vfdo@ubiquedigital.com
-    platform_code_repository_name: vfdo-esim-platform
-    platform_code_repository_type: git
-    platform_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git
-
-    ## as desired in prod JJB
-    # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    # platform_code_repository_branches: origin/tags/Release-*
-    #
-    ## useful for testing platform code from a branch
-    # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    # platform_code_repository_branches: origin/deploy_platformtest_env
-    #
-    ## useful for testing platform code from master head
-    # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    # platform_code_repository_branches: origin/master
-
-    platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/release/3.3.3
-
-    app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
-    app_code_repository_display_name: eSIM Jenkins
-    app_code_repository_display_email: vfdo@ubiquedigital.com
-    app_code_repository_name: vfleap
-    app_code_repository_type: git
-    app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
-    artefact_version_prefix: TB
-    initial_deployment_target: ape
-    workspace_clone_glob: 'LEAP/**'
-    js_app_file: vfleap.js
-    repo_language: nodejs
-    nodejs_version: 6.9.1
-    jobs:
-      - '{name}-checkout-code-branches'
-      - '{name}-checkout-platform-code'
-      - '{name}-build-artefact'
-      - '{name}-provision-{environment}':
-            environment: ape
-      - '{name}-configure-{environment}':
-            environment: ape
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-          environment: ape
-      - '{name}-test-{environment}':
-            environment: ape
-            next_environment: none
+# - project:
+#     name: test_esim-aws-branches
+#     disabled: true
+#     platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
+#     platform_code_repository_display_name: eSIM Jenkins
+#     platform_code_repository_display_email: vfdo@ubiquedigital.com
+#     platform_code_repository_name: vfdo-esim-platform
+#     platform_code_repository_type: git
+#     platform_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git
+#
+#     ## as desired in prod JJB
+#     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+#     # platform_code_repository_branches: origin/tags/Release-*
+#     #
+#     ## useful for testing platform code from a branch
+#     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+#     # platform_code_repository_branches: origin/deploy_platformtest_env
+#     #
+#     ## useful for testing platform code from master head
+#     # platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+#     # platform_code_repository_branches: origin/master
+#
+#     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+#     platform_code_repository_branches: origin/release/3.3.3
+#
+#     app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
+#     app_code_repository_display_name: eSIM Jenkins
+#     app_code_repository_display_email: vfdo@ubiquedigital.com
+#     app_code_repository_name: vfleap
+#     app_code_repository_type: git
+#     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
+#     artefact_version_prefix: TB
+#     initial_deployment_target: ape
+#     workspace_clone_glob: 'LEAP/**'
+#     js_app_file: vfleap.js
+#     repo_language: nodejs
+#     nodejs_version: 6.9.1
+#     jobs:
+#       - '{name}-checkout-code-branches'
+#       - '{name}-checkout-platform-code'
+#       - '{name}-build-artefact'
+#       - '{name}-provision-{environment}':
+#             environment: ape
+#       - '{name}-configure-{environment}':
+#             environment: ape
+#             playbook: test.yml
+#       - '{name}-deploy-to-{environment}':
+#           environment: ape
+#       - '{name}-test-{environment}':
+#             environment: ape
+#             next_environment: none
