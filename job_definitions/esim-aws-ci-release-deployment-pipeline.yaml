@@ -46,35 +46,35 @@
     nodejs_version: 6.9.1
     jobs:
       - '{name}-checkout-code-master'
-      # - '{name}-checkout-platform-code'
-      # - '{name}-build-artefact'
-      # - '{name}-provision-{environment}':
-      #       environment: cidev
-      # - '{name}-configure-{environment}':
-      #       environment: cidev
-      #       playbook: test.yml
-      # - '{name}-deploy-to-{environment}':
-      #       environment: cidev
-      # - '{name}-test-{environment}':
-      #       environment: cidev
-      #       next_environment: cisit
-      # - '{name}-provision-{environment}':
-      #       environment: cisit
-      # - '{name}-configure-{environment}':
-      #       environment: cisit
-      #       playbook: test.yml
-      # - '{name}-deploy-to-{environment}':
-      #       environment: cisit
-      # - '{name}-test-{environment}':
-      #       environment: cisit
-      #       next_environment: cipt
-      # - '{name}-provision-{environment}':
-      #       environment: cipt
-      # - '{name}-configure-{environment}':
-      #       environment: cipt
-      #       playbook: test.yml
-      # - '{name}-deploy-to-{environment}':
-      #       environment: cipt
-      # - '{name}-test-{environment}':
-      #       environment: cipt
-      #       next_environment: none
+      - '{name}-checkout-platform-code'
+      - '{name}-build-artefact'
+      - '{name}-provision-{environment}':
+            environment: cidev
+      - '{name}-configure-{environment}':
+            environment: cidev
+            playbook: test.yml
+      - '{name}-deploy-to-{environment}':
+            environment: cidev
+      - '{name}-test-{environment}':
+            environment: cidev
+            next_environment: cisit
+      - '{name}-provision-{environment}':
+            environment: cisit
+      - '{name}-configure-{environment}':
+            environment: cisit
+            playbook: test.yml
+      - '{name}-deploy-to-{environment}':
+            environment: cisit
+      - '{name}-test-{environment}':
+            environment: cisit
+            next_environment: cipt
+      - '{name}-provision-{environment}':
+            environment: cipt
+      - '{name}-configure-{environment}':
+            environment: cipt
+            playbook: test.yml
+      - '{name}-deploy-to-{environment}':
+            environment: cipt
+      - '{name}-test-{environment}':
+            environment: cipt
+            next_environment: none
