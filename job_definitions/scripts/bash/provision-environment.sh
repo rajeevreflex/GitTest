@@ -6,6 +6,5 @@
 ## due to "uata" as "ciuata" used for DE testing needs to be preserved.
 ## Here we keep "ciuata" place in the pipeline but take no action, so that
 ## pipeline view and job history is kept intact.
-if [[ "${ENVIRONMENT}" != "cipreprod" ]]; then
-  ./run --apply --environment "${ENVIRONMENT}" -y
-fi
+
+./run --apply --environment "${ENVIRONMENT}" -y
