@@ -51,6 +51,8 @@
     nodejs_version: 6.9.1
     jobs:
       - '{name}-checkout-code-release'
+      - '{name}-nodejs-eslint'
+      - '{name}-nodejs-unittest'
       - '{name}-checkout-platform-code'
       - '{name}-build-artefact'
       - '{name}-provision-{environment}':
