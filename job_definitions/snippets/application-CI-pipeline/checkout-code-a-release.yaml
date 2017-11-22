@@ -1,11 +1,11 @@
 ---
 - job-template:
-    name: '{name}-checkout-code-cut-release-branch'
+    name: '{name}-checkout-code-a-release'
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Code Checkout for {name} cut-release-branch'
+    display-name: 'Code Checkout for {name} branches'
     node: '{name}'
     properties:
       - build-discarder:
@@ -18,11 +18,10 @@
       - ansicolor
     scm:
       - '{app_code_repository_type}':
+          refspec: '{app_code_repository_refspec}'
           url: '{app_code_repository_uri}'
-          # branches:
-          #   - ':^(?!.*master).*$'
           branches:
-            - 'origin/feature/Performance_Test'
+            - '{app_code_repository_branches}'
           credentials-id: '{app_code_repository_credentials}'
           git-config-name: '{app_code_repository_display_name}'
           git-config-email: '{app_code_repository_display_email}'
@@ -33,12 +32,10 @@
           cron: "*/1 * * * *"
     builders:
       - shell: echo "======= Building branches $GIT_BRANCH ======="
-      - shell: !include-raw-escape: cutrelease.sh
-      - shell: !include-raw-escape: tag_and_merge_release.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-checkout-platform-code'
+              - '{name}-checkout-platform-a-code'
             predefined-parameters: |
               PIPELINE_NUMBER=${{BUILD_NUMBER}}
               APP_GIT_COMMIT=${{GIT_COMMIT}}

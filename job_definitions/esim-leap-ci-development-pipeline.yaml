@@ -50,28 +50,29 @@
     repo_language: nodejs
     nodejs_version: 6.9.1
     jobs:
-      - '{name}-checkout-code-release'
+      - '{name}-checkout-code-a-release'
       - '{name}-nodejs-eslint'
       - '{name}-nodejs-unittest'
-      - '{name}-checkout-platform-code'
-      - '{name}-build-artefact'
-      - '{name}-provision-{environment}':
+      - '{name}-checkout-platform-a-code'
+      - '{name}-build-artefact-a'
+      - '{name}-provision-a-{environment}':
             environment: udpma
-      - '{name}-configure-{environment}':
+      - '{name}-configure-a-{environment}':
             environment: udpma
             playbook: test.yml
-      - '{name}-deploy-to-{environment}':
+      - '{name}-deploy-a-to-{environment}':
             environment: udpma
-      - '{name}-test-{environment}':
+      - '{name}-test-a-{environment}':
             environment: udpma
             next_environment: udpmb
-      - '{name}-provision-{environment}':
+      - '{name}-provision-b-{environment}':
             environment: udpmb
-      - '{name}-configure-{environment}':
+      - '{name}-configure-b-{environment}':
             environment: udpmb
             playbook: test.yml
-      - '{name}-deploy-to-{environment}':
+      - '{name}-deploy-b-to-{environment}':
             environment: udpmb
-      - '{name}-test-{environment}':
+      - '{name}-test-b-{environment}':
             environment: udpmb
             next_environment: none
+      - '{name}-merge-to-deploy-cut-release-branch'
