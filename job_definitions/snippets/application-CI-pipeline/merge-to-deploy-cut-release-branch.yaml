@@ -10,6 +10,11 @@
           name: APP_GIT_COMMIT
           default: ""
           description: "The git commit of the VFLEAP repository"
+      - extended-choice:
+          name: release_type
+          description: "Select release type"
+          type: 'PT_RADIO'
+          value: Major,Minor,Patch
       - string:
           name: APP_GIT_BRANCH
           default: ""
