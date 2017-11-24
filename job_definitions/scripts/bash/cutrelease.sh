@@ -15,31 +15,39 @@ cutrelease() {
 
    release_type=${release_type}                     ## This value will be fetch from previous build
 
-   version=`echo ${last_release} | cut -b 23-`
-   a=( ${version//./ } )                   # replace points, split into array
-   #((a[2]++))                              # increment revision (or other part)
+   local release_branch="release"
+   local release_suffix="release_"
+
+   local release_root="origin/${release_branch}/${release_suffix}"
+
+   local discard_release_root=$(echo "${release_root}" | wc -c)
+
+   release_version=`echo ${last_release} | cut -b "${discard_release_root}"-`
+   release_number=( ${release_version//./ } )                   # replace points, split into array
+
    case $release_type in
    	Major)
-   	((a[0]++))
-   	((a[1]=0))
-   	((a[2]=0))
+   	((release_number[0]++))
+   	((release_number[1]=0))
+   	((release_number[2]=0))
    		;;
    	Minor)
-   	((a[1]++))
+   	((release_number[1]++))
+    ((release_number[2]=0))
    		;;
    	Patch)
-   	((a[2]++))
+   	((release_number[2]++))
    		;;
    	*)
    		echo "Sorry, I don't understand"
    		;;
      esac
-     version="release${a[0]}.${a[1]}.${a[2]}"       # compose new version
-     echo ${version}
+     release_version="${release_suffix}${release_number[0]}.${release_number[1]}.${release_number[2]}"       # compose new version
+     echo ${release_version}
 
-  #   git checkout -b "release/release_dev"  # This is hardcoded value for testing
-  #   git push --set-upstream origin "release/release_dev" # This is hardcoded value for testing
-  #   git checkout develop
-  #   git pull --rebase
+     git checkout -b "${release_branch}/${release_version}"
+     git push --set-upstream origin "${release_branch}/${release_version}"
+     git checkout develop
+     git pull --rebase
 }
  cutrelease
