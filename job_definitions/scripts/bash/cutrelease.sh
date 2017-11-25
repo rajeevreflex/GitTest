@@ -8,7 +8,8 @@ cutrelease() {
    git pull --rebase
    echo "do release"
    local last_release
-   last_release=$(git for-each-ref --count=1 --format="%(refname:short)" --sort=-committerdate refs/remotes/origin/release)
+   #last_release=$(git for-each-ref --count=1 --format="%(refname:short)" --sort=-committerdate refs/remotes/origin/release)
+   last_release=$(git branch -a | grep remotes/origin/release*| tail -1)
    echo "======================================="
    echo "last release: ${last_release}"
    echo ${release_type}
@@ -18,7 +19,7 @@ cutrelease() {
    local release_branch="release"
    local release_suffix="release_"
 
-   local release_root="origin/${release_branch}/${release_suffix}"
+   local release_root="remotes/origin/${release_branch}/${release_suffix}"
 
    local discard_release_root=$(echo "${release_root}" | wc -c)
 
