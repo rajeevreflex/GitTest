@@ -1,0 +1,72 @@
+---
+- job-template:
+    name: '{name}-nodejs-eslint-a'
+    parameters:
+      - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Code ESLint for {name}'
+    node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Test
+          task: NodeJS Linting
+    wrappers:
+      - ansicolor
+    scm:
+      - '{app_code_repository_type}':
+          url: '{app_code_repository_uri}'
+          credentials-id: '{app_code_repository_credentials}'
+          git-config-name: '{app_code_repository_display_name}'
+          git-config-email: '{app_code_repository_display_email}'
+          timeout: 5
+    builders:
+      - inject:
+          properties-content: |
+            WORKSPACE_CLONE_GLOB={workspace_clone_glob}
+            JS_APP_FILE={js_app_file}
+            NODEJS_VERSION={nodejs_version}
+      - shell: echo "======= Using NodeJS version -- $NODEJS_VERSION ======="
+      - shell: echo "======= Commit -- $GIT_COMMIT ======="
+      - shell: echo "======= Branch -- $GIT_BRANCH ======="
+      #- shell: !include-raw-escape: install-nodejs-deps.sh
+      #- shell: !include-raw-escape: run-eslint.sh
+    publishers:
+      - checkstyle:
+          pattern: '**/eslint.xml'
+          can-run-on-failed: true
+          healthy: 0
+          unhealthy: 5000
+          health-threshold: 'high'
+          thresholds:
+            unstable:
+              total-high: 5000
+              total-all: 5000
+            failed:
+              total-high: 5000
+              total-all: 5000
+      - clone-workspace:
+          workspace-glob: '{workspace_clone_glob}'
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-{repo_language}-unittest-a'
+            current-parameters: true
+            git-revision: true
+            condition: SUCCESS
+            node-label: '{name}'
