@@ -45,8 +45,8 @@
       - shell: echo "======= Using NodeJS version -- $NODEJS_VERSION ======="
       - shell: echo "======= Commit -- $GIT_COMMIT ======="
       - shell: echo "======= Branch -- $GIT_BRANCH ======="
-      #- shell: !include-raw-escape: install-nodejs-deps.sh
-      #- shell: !include-raw-escape: run-eslint.sh
+      - shell: !include-raw-escape: install-nodejs-deps.sh
+      - shell: !include-raw-escape: run-eslint.sh
     publishers:
       - checkstyle:
           pattern: '**/eslint.xml'

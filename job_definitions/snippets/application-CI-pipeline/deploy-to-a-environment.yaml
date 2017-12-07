@@ -63,7 +63,7 @@
         - shell: echo "Deploy to environment-a ${{ENVIRONMENT}}"
         - shell: echo "Deploy"
         #- shell: echo "Deploy to environment-a ${{ARTEFACT_VERSION}}"
-        #- shell: !include-raw-escape: deploy-artefact.sh
+        - shell: !include-raw-escape: deploy-artefact.sh
     publishers:
       - trigger-parameterized-builds:
           - project:

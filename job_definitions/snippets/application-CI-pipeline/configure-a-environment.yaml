@@ -60,7 +60,7 @@
         - shell: echo "Configure environment-a ${{ENVIRONMENT}}"
         - shell: echo "Configure"
         #- shell: echo "Using Ansible playbook - ${{PLAYBOOK}}"
-        #- shell: !include-raw-escape: configure-environment.sh
+        - shell: !include-raw-escape: configure-environment.sh
     publishers:
       - trigger-parameterized-builds:
           - project:

@@ -42,7 +42,7 @@
     builders:
       - shell: echo "======= Rebase -- origin/master $GIT_BRANCH ======="
       - shell: echo "======= Commit -- $GIT_COMMIT ======="
-      - shell: !include-raw-escape: cutrelease.sh
+      #- shell: !include-raw-escape: cutrelease.sh
       - shell: echo "======= Branch -- $GIT_BRANCH ======="
     #  - shell: !include-raw-escape: tag_and_merge_release.sh
       #- shell: git rebase origin/master

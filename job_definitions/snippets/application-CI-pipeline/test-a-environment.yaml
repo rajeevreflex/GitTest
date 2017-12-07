@@ -63,7 +63,7 @@
         - shell: echo "Testing environment-a ${{ENVIRONMENT}}"
         - shell: echo "Testing A"
       #  - shell: !include-raw-escape: test-artefact.sh
-      #  - shell: !include-raw-escape: test-environment.sh
+        - shell: !include-raw-escape: test-environment.sh
     publishers:
       - pipeline:
           project: '{name}-provision-b-{next_environment}'

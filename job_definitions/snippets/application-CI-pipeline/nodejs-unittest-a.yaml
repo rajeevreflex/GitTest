@@ -44,52 +44,44 @@
       - shell: echo "======= Using NodeJS version -- $NODEJS_VERSION ======="
       - shell: echo "======= Commit -- $GIT_COMMIT ======="
       - shell: echo "======= Branch -- $GIT_BRANCH ======="
-      #- shell: !include-raw-escape: run-nodejs-unit-tests.sh
+      - shell: !include-raw-escape: run-nodejs-unit-tests.sh
+
     publishers:
-      - trigger-parameterized-builds:
-          - project:
-              - '{name}-checkout-platform-a-code'
-            predefined-parameters: |
-              PIPELINE_NUMBER=${{BUILD_NUMBER}}
-              APP_GIT_COMMIT=${{GIT_COMMIT}}
-              APP_GIT_BRANCH=${{GIT_BRANCH}}
-            condition: SUCCESS
-    # publishers:
-    #   - cobertura:
-    #       report-file: "**/test/coverage/cobertura-coverage.xml"
-    #       targets:
-    #         - files:
-    #             healthy: 100
-    #             unhealthy: 100
-    #             failing: 100
-    #         - method:
-    #             healthy: 90
-    #             unhealthy: 80
-    #             failing: 80
-    #         - line:
-    #             healthy: 90
-    #             unhealthy: 80
-    #             failing: 80
-    #         - conditional:
-    #             healthy: 90
-    #             unhealthy: 80
-    #             failing: 80
-    #   - html-publisher:
-    #       name: "{name} nodejs coverage"
-    #       dir: "test/coverage/lcov-report/"
-    #       files: "index.html"
-    #       keep-all: true
-    #       allow-missing: true
-    #       link-to-last-build: true
-    #   - conditional-publisher:
-    #       - condition-kind: regexp
-    #         condition-expression: '^.*feature/EAP-'
-    #         condition-searchtext: '${{GIT_BRANCH}}'
-    #         action:
-    #           - trigger-parameterized-builds:
-    #             - project:
-    #                 - '{name}-checkout-platform-a-code'
-    #               current-parameters: true
-    #               git-revision: true
-    #               condition: SUCCESS
-    #               node-label: '{name}'
+      - cobertura:
+          report-file: "**/test/coverage/cobertura-coverage.xml"
+          targets:
+            - files:
+                healthy: 100
+                unhealthy: 100
+                failing: 100
+            - method:
+                healthy: 90
+                unhealthy: 80
+                failing: 80
+            - line:
+                healthy: 90
+                unhealthy: 80
+                failing: 80
+            - conditional:
+                healthy: 90
+                unhealthy: 80
+                failing: 80
+      - html-publisher:
+          name: "{name} nodejs coverage"
+          dir: "test/coverage/lcov-report/"
+          files: "index.html"
+          keep-all: true
+          allow-missing: true
+          link-to-last-build: true
+      - conditional-publisher:
+          - condition-kind: regexp
+            condition-expression: '^.*feature/EAP-'
+            condition-searchtext: '${{GIT_BRANCH}}'
+            action:
+              - trigger-parameterized-builds:
+                - project:
+                    - '{name}-checkout-platform-a-code'
+                  current-parameters: true
+                  git-revision: true
+                  condition: SUCCESS
+                  node-label: '{name}'

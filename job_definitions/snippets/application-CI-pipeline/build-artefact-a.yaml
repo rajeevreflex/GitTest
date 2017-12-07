@@ -54,8 +54,7 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-      #- shell: !include-raw-escape: build-artefact.sh
-       - shell:   echo "Building artifect"
+      - shell: !include-raw-escape: build-artefact.sh
     publishers:
       - pipeline:
           #project: '{name}-provision-{initial_deployment_target}'
