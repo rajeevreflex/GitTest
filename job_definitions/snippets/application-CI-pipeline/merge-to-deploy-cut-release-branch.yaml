@@ -2,11 +2,18 @@
 - job-template:
     name: '{name}-merge-to-deploy-cut-release-branch'
     parameters:
-      - extended-choice:
-          name: release_type
-          description: "Select release type"
-          type: 'PT_RADIO'
-          value: Major,Minor,Patch
+      - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
@@ -24,7 +31,10 @@
       - ansicolor
     scm:
       - '{app_code_repository_type}':
+          refspec: '{app_code_repository_refspec}'
           url: '{app_code_repository_uri}'
+          branches:
+            - '{app_code_repository_branches}'
           credentials-id: '{app_code_repository_credentials}'
           git-config-name: '{app_code_repository_display_name}'
           git-config-email: '{app_code_repository_display_email}'

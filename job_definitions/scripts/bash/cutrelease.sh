@@ -16,8 +16,8 @@ cutrelease() {
    #
   #  release_type=${release_type}                     ## This value will be fetch from previous build
    #
-  #  local release_branch="release"
-  #  local release_suffix="release_"
+    local release_branch="release"
+    local release_suffix="release_"
    #
   #  local release_root="remotes/origin/${release_branch}/${release_suffix}"
    #
@@ -45,10 +45,14 @@ cutrelease() {
   #    esac
   #    release_version="${release_suffix}${release_number[0]}.${release_number[1]}.${release_number[2]}"       # compose new version
   #    echo ${release_version}
-    echo ${app_code_repository_branches}
-    #  git checkout -b "${release_branch}/${release_version}"
-    #  git push --set-upstream origin "${release_branch}/${release_version}"
-    #  git checkout develop
-    #  git pull --rebase
+    echo ${APP_GIT_BRANCH}
+    echo ${GIT_BRANCH}
+    local branch_title
+    branch_title= echo "${GIT_BRANCH}" | rev | cut -d"/" -f1  | rev
+    echo ${branch_title}
+      git checkout -b "${release_branch}/${release_suffix}${branch_title}"
+      git push --set-upstream origin "${release_branch}/${release_suffix}${branch_title}"
+      git checkout develop
+      git pull --rebase
 }
  cutrelease
