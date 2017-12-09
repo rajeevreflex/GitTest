@@ -4,14 +4,29 @@
 source ./LEAP/test/leap_env_variables.sh
 
 ### Find the correct directory that contains the JSON package information
-FULL_GLOB=${WORKSPACE_CLONE_GLOB}
-CODE_PATH=$(echo $FULL_GLOB|cut -d '/' -f 1)
+FULL_GLOB=( ${WORKSPACE_CLONE_GLOB} )
+echo ${FULL_GLOB}
+for i in "${FULL_GLOB[@]}"
+do
+  echo "Running Unit test for $i"
+  pushd $i
+  source "${HOME}/.bashrc"
+  nvm install "${NODEJS_VERSION}"
+  nvm use "${NODEJS_VERSION}"
+  npm install
+  npm test
+  popd -1
+done
 
-# Now run the coverage command
-cd "${CODE_PATH}" || exit 1
-echo "Changing to $(pwd) and running npm test"
-source "${HOME}/.bashrc"
-nvm install "${NODEJS_VERSION}"
-nvm use "${NODEJS_VERSION}"
-npm install
-npm test
+# array=( "LEAP" "LEAP_LOGGER" "LEAP_NOTIFICATION" "AWS/Lambda/CustomAuthorizer" "AWS/Lambda/FileUpload" "AWS/Lambda/LEAP_LOG_EXPORTER" )
+# for i in "${FULL_GLOB[@]}"
+# do
+#   echo "Running Unit test for $i"
+#   pushd $i
+#   source "${HOME}/.bashrc"
+#   nvm install "${NODEJS_VERSION}"
+#   nvm use "${NODEJS_VERSION}"
+#   npm install
+#   npm test
+#   popd -1
+# done

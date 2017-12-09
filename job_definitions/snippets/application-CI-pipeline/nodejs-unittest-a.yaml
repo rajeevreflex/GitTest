@@ -13,6 +13,14 @@
           name: APP_GIT_BRANCH
           default: ""
           description: "The git branch of the VFLEAP repository"
+      - string:
+          name: PLATFORM_RELEASE_COMMIT_ID
+          default: ""
+          description: "The git commit of the latest release in the vfdo-esim-platform repository."
+      - string:
+          name: PLATFORM_RELEASE_BRANCH
+          default: ""
+          description: "The git branch/tag name of the latest release in the vfdo-esim-platform repository."
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
@@ -31,6 +39,7 @@
     scm:
       - '{app_code_repository_type}':
           url: '{app_code_repository_uri}'
+          refspec: '{app_code_repository_refspec}'
           branches:
             - '{app_code_repository_branches}'
           credentials-id: '{app_code_repository_credentials}'
@@ -77,13 +86,12 @@
           link-to-last-build: true
       - conditional-publisher:
           - condition-kind: regexp
-            condition-expression: '^.*[E]AP+-[0-9]+\_*'
+            condition-expression: '^.*[E]AP+-[0-9]+\_.*'
             condition-searchtext: '${{GIT_BRANCH}}'
             action:
               - trigger-parameterized-builds:
                 - project:
                     - '{name}-checkout-platform-a-code'
                   current-parameters: true
-                  git-revision: true
                   condition: SUCCESS
                   node-label: '{name}'

@@ -47,7 +47,7 @@
     app_code_repository_branches: origin/test_feature/*
     artefact_version_prefix: DEVELOP
     initial_deployment_target: udpmb
-    workspace_clone_glob: 'LEAP/**'
+    workspace_clone_glob: '"LEAP/**" "LEAP_LOGGER/**" "LEAP_NOTIFICATION/**" "AWS/Lambda/CustomAuthorizer/**" "AWS/Lambda/FileUpload/**" "AWS/Lambda/LEAP_LOG_EXPORTER/**"'
     js_app_file: vfleap.js
     repo_language: nodejs
     nodejs_version: 6.9.1
@@ -67,14 +67,14 @@
       - '{name}-test-a-{environment}':
             environment: udpmb
             next_environment: udvba
-      - '{name}-provision-b-{environment}':
-            environment: udvba
-      - '{name}-configure-b-{environment}':
-            environment: udvba
-            playbook: test.yml
-      - '{name}-deploy-b-to-{environment}':
-            environment: udvba
-      - '{name}-test-b-{environment}':
-            environment: udvba
-            next_environment: none
-      - '{name}-merge-to-deploy-cut-release-branch'
+      # - '{name}-provision-b-{environment}':
+      #       environment: udvba
+      # - '{name}-configure-b-{environment}':
+      #       environment: udvba
+      #       playbook: test.yml
+      # - '{name}-deploy-b-to-{environment}':
+      #       environment: udvba
+      # - '{name}-test-b-{environment}':
+      #       environment: udvba
+      #       next_environment: none
+      # - '{name}-merge-to-deploy-cut-release-branch'

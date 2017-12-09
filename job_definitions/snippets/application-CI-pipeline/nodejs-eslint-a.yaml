@@ -14,6 +14,14 @@
           name: APP_GIT_BRANCH
           default: ""
           description: "The git branch of the VFLEAP repository"
+      - string:
+          name: PLATFORM_RELEASE_COMMIT_ID
+          default: ""
+          description: "The git commit of the latest release in the vfdo-esim-platform repository."
+      - string:
+          name: PLATFORM_RELEASE_BRANCH
+          default: ""
+          description: "The git branch/tag name of the latest release in the vfdo-esim-platform repository."
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
@@ -31,6 +39,7 @@
       - ansicolor
     scm:
       - '{app_code_repository_type}':
+          refspec: '{app_code_repository_refspec}'
           url: '{app_code_repository_uri}'
           branches:
             - '{app_code_repository_branches}'
@@ -69,6 +78,5 @@
           - project:
               - '{name}-{repo_language}-unittest-a'
             current-parameters: true
-            git-revision: true
             condition: SUCCESS
             node-label: '{name}'

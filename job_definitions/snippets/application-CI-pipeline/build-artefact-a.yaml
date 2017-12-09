@@ -37,6 +37,8 @@
       - inject:
           properties-content: |
             ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
+            GIT_COMMIT=${{PLATFORM_RELEASE_COMMIT_ID}}
+            GIT_BRANCH=${{PLATFORM_RELEASE_BRANCH}}
     wrappers:
       - ansicolor
     scm:

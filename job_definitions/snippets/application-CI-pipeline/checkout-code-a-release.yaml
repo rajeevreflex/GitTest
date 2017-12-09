@@ -35,7 +35,7 @@
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-{repo_language}-eslint-a'
+              - '{name}-nodejs-eslint-a'
             predefined-parameters: |
               PIPELINE_NUMBER=${{BUILD_NUMBER}}
               APP_GIT_COMMIT=${{GIT_COMMIT}}
