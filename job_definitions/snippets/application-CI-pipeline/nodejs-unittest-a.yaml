@@ -31,6 +31,8 @@
     scm:
       - '{app_code_repository_type}':
           url: '{app_code_repository_uri}'
+          branches:
+            - '{app_code_repository_branches}'
           credentials-id: '{app_code_repository_credentials}'
           git-config-name: '{app_code_repository_display_name}'
           git-config-email: '{app_code_repository_display_email}'
@@ -75,7 +77,7 @@
           link-to-last-build: true
       - conditional-publisher:
           - condition-kind: regexp
-            condition-expression: '^.*feature/EAP-'
+            condition-expression: '^.*[E]AP+-[0-9]+\_*'
             condition-searchtext: '${{GIT_BRANCH}}'
             action:
               - trigger-parameterized-builds:
