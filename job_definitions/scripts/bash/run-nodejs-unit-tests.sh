@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source ./LEAP/test/leap_env_variables.sh
 source "${HOME}/.bashrc"
-local base_directory=`pwd`
+base_directory=`pwd`
 #echo "WORKSPACE_CLONE_GLOB : ${WORKSPACE_CLONE_GLOB[@]}"
 ### Find the correct directory that contains the JSON package information
 FULL_GLOB=(${WORKSPACE_CLONE_GLOB[@]})
