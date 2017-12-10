@@ -47,7 +47,8 @@
     app_code_repository_branches: origin/test_feature/*
     artefact_version_prefix: DEVELOP
     initial_deployment_target: udpmb
-    workspace_clone_glob: '"LEAP/**" "LEAP_LOGGER/**" "LEAP_NOTIFICATION/**" "AWS/Lambda/CustomAuthorizer/**" "AWS/Lambda/FileUpload/**" "AWS/Lambda/LEAP_LOG_EXPORTER/**"'
+    workspace_clone_glob: LEAP LEAP_LOGGER LEAP_NOTIFICATION AWS/Lambda/CustomAuthorizer AWS/Lambda/FileUpload AWS/Lambda/LEAP_LOG_EXPORTER
+    workspace_clone_glob_lint: LEAP/**
     js_app_file: vfleap.js
     repo_language: nodejs
     nodejs_version: 6.9.1

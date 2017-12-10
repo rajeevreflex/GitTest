@@ -50,7 +50,7 @@
     builders:
       - inject:
           properties-content: |
-            WORKSPACE_CLONE_GLOB={workspace_clone_glob}
+            WORKSPACE_CLONE_GLOB_LINT={workspace_clone_glob_lint}
             JS_APP_FILE={js_app_file}
             NODEJS_VERSION={nodejs_version}
       - shell: echo "======= Using NodeJS version -- $NODEJS_VERSION ======="
@@ -73,7 +73,7 @@
               total-high: 5000
               total-all: 5000
       - clone-workspace:
-          workspace-glob: '{workspace_clone_glob}'
+          workspace-glob: '{workspace_clone_glob_lint}'
       - trigger-parameterized-builds:
           - project:
               - '{name}-{repo_language}-unittest-a'
