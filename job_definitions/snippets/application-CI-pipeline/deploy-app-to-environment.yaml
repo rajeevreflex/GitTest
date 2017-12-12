@@ -1,6 +1,5 @@
----
 - job-template:
-    name: '{name}-configure-b-{environment}'
+    name: '{name}-deploy-app-to-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -30,16 +29,20 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Configure {environment} environment for {name}.'
+    display-name: 'Deploy {name} to {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
+      - delivery-pipeline:
+          stage: Deploy
+          task: Deploy to {environment}
+          description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
             ENVIRONMENT={environment}
-            PLAYBOOK={playbook}
+            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
     wrappers:
       - ansicolor
     scm:
@@ -55,15 +58,15 @@
     wrappers:
       - ssh-agent-credentials:
             users:
-                - '{platform_code_repository_credentials}'
+                - '{app_code_repository_credentials}'
     builders:
-        - shell: echo "Configure b environment ${{ENVIRONMENT}}"
-        - shell: echo "Configure B"
-        #- shell: echo "Using Ansible playbook - ${{PLAYBOOK}}"
-        #- shell: !include-raw-escape: configure-environment.sh
+        - shell: echo "Deploy to environment-a ${{ENVIRONMENT}}"
+        - shell: echo "Deploy"
+        #- shell: echo "Deploy to environment-a ${{ARTEFACT_VERSION}}"
+        - shell: !include-raw-escape: deploy-artefact.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-deploy-b-to-{environment}'
+              - '{name}-test-app-to-{environment}'
             current-parameters: true
             condition: SUCCESS

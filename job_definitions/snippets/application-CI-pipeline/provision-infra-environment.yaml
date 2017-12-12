@@ -1,6 +1,6 @@
 ---
 - job-template:
-    name: '{name}-checkout-platform-a-code'
+    name: '{name}-{next}-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -14,19 +14,31 @@
           name: APP_GIT_BRANCH
           default: ""
           description: "The git branch of the VFLEAP repository"
+      - string:
+          name: ARTEFACT_VERSION
+          default: ""
+          description: "The artefact version to deploy"
+      - string:
+          name: PLATFORM_RELEASE_COMMIT_ID
+          default: ""
+          description: "The git commit of the latest release in the vfdo-esim-platform repository."
+      - string:
+          name: PLATFORM_RELEASE_BRANCH
+          default: ""
+          description: "The git branch/tag name of the latest release in the vfdo-esim-platform repository."
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Latest tagged platform code Checkout for {name}'
+    display-name: 'Provison {environment} environment for {name}.'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
-      - delivery-pipeline:
-          stage: Build
-          task: Checkout Code
+      - inject:
+          properties-content: |
+            ENVIRONMENT={environment}
     wrappers:
       - ansicolor
     scm:
@@ -34,20 +46,22 @@
           refspec: '{platform_code_repository_refspec}'
           url: '{platform_code_repository_uri}'
           branches:
-            - '{platform_code_repository_branches}'
+            - ${{PLATFORM_RELEASE_BRANCH}}
           credentials-id: '{platform_code_repository_credentials}'
           git-config-name: '{platform_code_repository_display_name}'
           git-config-email: '{platform_code_repository_display_email}'
           timeout: 5
+    wrappers:
+      - ssh-agent-credentials:
+            users:
+                - '{platform_code_repository_credentials}'
     builders:
-      - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
-      - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
+        - shell: echo "Provisioning environment-a ${{ENVIRONMENT}}"
+        - shell: echo "Provisioning"
+        - shell: !include-raw-escape: provision-environment.sh
     publishers:
       - trigger-parameterized-builds:
           - project:
-              - '{name}-build-artefact-a'
+              - '{name}-configure-infra-{environment}'
             current-parameters: true
-            predefined-parameters: |
-              PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
-              PLATFORM_RELEASE_BRANCH=${{GIT_BRANCH}}
             condition: SUCCESS

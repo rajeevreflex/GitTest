@@ -1,6 +1,6 @@
 ---
 - job-template:
-    name: '{name}-merge-to-deploy-cut-release-branch'
+    name: '{name}-{next}-{environment}-branch' 
     parameters:
       - string:
           name: PIPELINE_NUMBER

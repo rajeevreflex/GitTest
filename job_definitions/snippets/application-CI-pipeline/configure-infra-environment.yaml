@@ -1,5 +1,6 @@
+---
 - job-template:
-    name: '{name}-build-artefact-a'
+    name: '{name}-configure-infra-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -14,6 +15,10 @@
           default: ""
           description: "The git branch of the VFLEAP repository"
       - string:
+          name: ARTEFACT_VERSION
+          default: ""
+          description: "The artefact version to deploy"
+      - string:
           name: PLATFORM_RELEASE_COMMIT_ID
           default: ""
           description: "The git commit of the latest release in the vfdo-esim-platform repository."
@@ -25,20 +30,16 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: '{name} build artefact'
+    display-name: 'Configure {environment} environment for {name}.'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
-      - delivery-pipeline:
-          stage: Build
-          task: Build Artefact
       - inject:
           properties-content: |
-            ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
-            GIT_COMMIT=${{PLATFORM_RELEASE_COMMIT_ID}}
-            GIT_BRANCH=${{PLATFORM_RELEASE_BRANCH}}
+            ENVIRONMENT={environment}
+            PLAYBOOK={playbook}
     wrappers:
       - ansicolor
     scm:
@@ -54,12 +55,15 @@
     wrappers:
       - ssh-agent-credentials:
             users:
-                - '{app_code_repository_credentials}'
+                - '{platform_code_repository_credentials}'
     builders:
-      - shell: !include-raw-escape: build-artefact.sh
+        - shell: echo "Configure environment-a ${{ENVIRONMENT}}"
+        - shell: echo "Configure"
+        - shell: echo "Using Ansible playbook - ${{PLAYBOOK}}"
+        #- shell: !include-raw-escape: configure-environment.sh
     publishers:
-      - pipeline:
-          #project: '{name}-provision-{initial_deployment_target}'
-          project: '{name}-provision-a-{initial_deployment_target}'
-          current-parameters: true
-          predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-deploy-app-to-{environment}'
+            current-parameters: true
+            condition: SUCCESS

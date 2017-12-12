@@ -1,6 +1,5 @@
----
 - job-template:
-    name: '{name}-provision-a-{environment}'
+    name: '{name}-test-app-to-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -30,15 +29,20 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Provison {environment} environment for {name}.'
+    display-name: 'Test {name} on {environment} environment'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
+      - delivery-pipeline:
+          stage: Test
+          task: Testing {environment}
+          description: {ARTEFACT_VERSION}
       - inject:
           properties-content: |
             ENVIRONMENT={environment}
+            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
     wrappers:
       - ansicolor
     scm:
@@ -54,14 +58,20 @@
     wrappers:
       - ssh-agent-credentials:
             users:
-                - '{platform_code_repository_credentials}'
+                - '{app_code_repository_credentials}'
     builders:
-        - shell: echo "Provisioning environment-a ${{ENVIRONMENT}}"
-        - shell: echo "Provisioning"
-        - shell: !include-raw-escape: provision-environment.sh
+        - shell: echo "Testing environment-a ${{ENVIRONMENT}}"
+        - shell: echo "Testing A"
+        #  - shell: !include-raw-escape: test-artefact.sh
+        - shell: !include-raw-escape: test-environment.sh
     publishers:
-      - trigger-parameterized-builds:
-          - project:
-              - '{name}-configure-a-{environment}'
-            current-parameters: true
-            condition: SUCCESS
+      - pipeline:
+          project: '{name}-{next}-{next_environment}'
+          current-parameters: true
+      - html-publisher:
+         name: "{name} mocha coverage"
+         dir: '/home/jenkins/workspace/{name}-test-{environment}/vfleap_repository/LEAP_TEST/mochawesome-report/'
+         files: "mochawesome.html"
+         keep-all: true
+         allow-missing: true
+         link-to-last-build: true
