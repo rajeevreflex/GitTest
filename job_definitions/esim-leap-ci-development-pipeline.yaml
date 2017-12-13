@@ -53,6 +53,7 @@
     repo_language: nodejs
     nodejs_version: 6.9.1
     next: provision-infra
+    regexp: ^.*[E]AP+-[0-9]+\_.*
     jobs:
       - '{name}-checkout-code-for-app'
       - '{name}-nodejs-eslint-for-app-code'

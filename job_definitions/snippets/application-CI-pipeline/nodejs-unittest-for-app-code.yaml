@@ -86,7 +86,7 @@
           link-to-last-build: true
       - conditional-publisher:
           - condition-kind: regexp
-            condition-expression: '^.*[E]AP+-[0-9]+\_.*'
+            condition-expression: '{regexp}'
             condition-searchtext: '${{GIT_BRANCH}}'
             action:
               - trigger-parameterized-builds:
