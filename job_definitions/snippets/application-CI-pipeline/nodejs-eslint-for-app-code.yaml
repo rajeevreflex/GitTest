@@ -33,7 +33,7 @@
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Test
+          stage: Linting
           task: NodeJS Linting
     wrappers:
       - ansicolor

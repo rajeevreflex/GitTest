@@ -1,6 +1,6 @@
 ---
 - job-template:
-    name: '{name}-{next}-{environment}-branch' 
+    name: '{name}-{next}-{environment}-branch'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -25,7 +25,7 @@
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Check
+          stage: Release
           task: Rebase on MASTER
     wrappers:
       - ansicolor

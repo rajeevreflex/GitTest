@@ -32,7 +32,7 @@
           days-to-keep: 365
           num-to-keep: 500
       - delivery-pipeline:
-          stage: Test
+          stage: Unit Tests
           task: NodeJS Unit Tests
     wrappers:
       - ansicolor
@@ -60,6 +60,10 @@
     publishers:
       - cobertura:
           report-file: "**/test/coverage/cobertura-coverage.xml"
+          only-stable: "true"
+          fail-no-reports: "true"
+          fail-unhealthy: "true"
+          fail-unstable: "true"
           targets:
             - files:
                 healthy: 100
