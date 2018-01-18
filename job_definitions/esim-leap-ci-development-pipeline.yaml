@@ -59,6 +59,7 @@
       - '{name}-nodejs-eslint-for-app-code'
       - '{name}-nodejs-unittest-for-app-code'
       - '{name}-checkout-platform-code-for-infra'
+      - '{name}-eSIM-unittest-for-platform-code'
       - '{name}-build-app-artefact'
       - '{name}-{next}-{environment}':
             environment: udpmb
