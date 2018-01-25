@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-eSIM-unittest-for-platform-code'
+    name: '{name}-infra-platform-code-unittest'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -55,6 +55,6 @@
     publishers:
       - pipeline:
           #project: '{name}-provision-{initial_deployment_target}'
-          project: '{name}-build-app-artefact'
+          project: '{name}-build-application-artefact'
           current-parameters: true
           predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}

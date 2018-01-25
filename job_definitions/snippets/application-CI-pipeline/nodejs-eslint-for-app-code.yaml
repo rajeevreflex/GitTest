@@ -1,6 +1,6 @@
 ---
 - job-template:
-    name: '{name}-nodejs-eslint-for-app-code'
+    name: '{name}-nodejs-code-quality-check'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -76,7 +76,7 @@
           workspace-glob: '{workspace_clone_glob_lint}'
       - trigger-parameterized-builds:
           - project:
-              - '{name}-{repo_language}-unittest-for-app-code'
+              - '{name}-{repo_language}-application-unittest'
             current-parameters: true
             condition: SUCCESS
             node-label: '{name}'

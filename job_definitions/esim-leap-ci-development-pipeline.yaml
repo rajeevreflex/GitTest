@@ -55,12 +55,12 @@
     next: provision-infra
     regexp: ^.*[E]AP+-[0-9]+\_.*
     jobs:
-      - '{name}-checkout-code-for-app'
-      - '{name}-nodejs-eslint-for-app-code'
-      - '{name}-nodejs-unittest-for-app-code'
-      - '{name}-checkout-platform-code-for-infra'
-      - '{name}-eSIM-unittest-for-platform-code'
-      - '{name}-build-app-artefact'
+      - '{name}-application-code-checkout'
+      - '{name}-nodejs-code-quality-check'
+      - '{name}-nodejs-application-unittest'
+      - '{name}-checkout-infra-platform-code'
+      - '{name}-infra-platform-code-unittest'
+      - '{name}-build-application-artefact'
       - '{name}-{next}-{environment}':
             environment: udpmb
       - '{name}-configure-infra-{environment}':

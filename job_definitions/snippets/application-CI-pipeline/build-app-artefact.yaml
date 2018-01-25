@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-build-app-artefact'
+    name: '{name}-build-application-artefact'
     parameters:
       - string:
           name: PIPELINE_NUMBER

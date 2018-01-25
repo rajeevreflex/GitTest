@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-nodejs-unittest-for-app-code'
+    name: '{name}-nodejs-application-unittest'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -95,7 +95,7 @@
             action:
               - trigger-parameterized-builds:
                 - project:
-                    - '{name}-checkout-platform-code-for-infra'
+                    - '{name}-checkout-infra-platform-code'
                   current-parameters: true
                   condition: SUCCESS
                   node-label: '{name}'
