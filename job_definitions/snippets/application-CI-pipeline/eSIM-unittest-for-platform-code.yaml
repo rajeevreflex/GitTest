@@ -25,7 +25,7 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Unit Tests for {name}'
+    display-name: 'Unit Tests for platform code'
     node: '{name}'
     properties:
       - build-discarder:
