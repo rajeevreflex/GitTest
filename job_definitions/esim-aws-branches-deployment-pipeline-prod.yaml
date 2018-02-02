@@ -2,19 +2,19 @@
 #### This file contains the build pipeline for the eSIM LEAP Infrastructure and
 ###  application code deployment pipeline for branches.
 ## The Pipeline view values:
-#     Name:
+# #     Name:
 #         "eSIM Deployment Branches Pipeline"
 #     Description:
 #         "This pipeline packages and deploys from the App Code branches."
 #     Build Pipeline View Title:
 #         "eSIM Deployment Branches"
 # You should create one project per product and link all the steps
-
-# - project:
+#
+- project: ytytytttt
 #     name: esim-aws-branches
 #     disabled: false
 #     platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
-#     platform_code_repository_display_name: eSIM Jenkins
+# #     platform_code_repository_display_name: eSIM Jenkins
 #     platform_code_repository_display_email: vfdo@ubiquedigital.com
 #     platform_code_repository_name: vfdo-esim-platform
 #     platform_code_repository_type: git
