@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-test-{environment}'
+    name: '{name}-test-app-to-{environment}'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -36,7 +36,7 @@
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Test
+          stage: Integration Test
           task: Testing {environment}
           description: {ARTEFACT_VERSION}
       - inject:
@@ -61,12 +61,18 @@
                 - '{app_code_repository_credentials}'
     builders:
         - shell: echo "Testing environment ${{ENVIRONMENT}}"
-      #  - shell: !include-raw-escape: test-artefact.sh
+        #  - shell: !include-raw-escape: test-artefact.sh
         - shell: !include-raw-escape: test-environment.sh
     publishers:
       - pipeline:
-          project: '{name}-provision-{next_environment}'
+          project: '{name}-{next}-{next_environment}'
           current-parameters: true
+      - text-finder:
+          regexp: "128 passing"
+          fileset: ""
+          also-check-console-output: true
+          succeed-if-found: true
+          unstable-if-found: false
       - html-publisher:
          name: "{name} mocha coverage"
          dir: '/home/jenkins/workspace/{name}-test-{environment}/vfleap_repository/LEAP_TEST/mochawesome-report/'

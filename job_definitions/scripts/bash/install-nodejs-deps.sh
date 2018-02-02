@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 ### Find the correct directory that contains the JSON package information
-FULL_GLOB=${WORKSPACE_CLONE_GLOB}
+FULL_GLOB=${WORKSPACE_CLONE_GLOB_LINT}
 CODE_PATH=$(echo $FULL_GLOB|cut -d '/' -f 1)
 # Now change to that directory
 cd $CODE_PATH

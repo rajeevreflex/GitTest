@@ -2,48 +2,48 @@
 #### This file contains the build pipeline for the eSIM LEAP Infrastructure and
 ###  application code deployment pipeline for branches.
 ## The Pipeline view values:
-#     Name:
+# #     Name:
 #         "eSIM Deployment Branches Pipeline"
 #     Description:
 #         "This pipeline packages and deploys from the App Code branches."
 #     Build Pipeline View Title:
 #         "eSIM Deployment Branches"
 # You should create one project per product and link all the steps
-
-- project:
-    name: esim-aws-branches
-    disabled: false
-    platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
-    platform_code_repository_display_name: eSIM Jenkins
-    platform_code_repository_display_email: vfdo@ubiquedigital.com
-    platform_code_repository_name: vfdo-esim-platform
-    platform_code_repository_type: git
-    platform_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git
-    platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
-    platform_code_repository_branches: origin/tags/Release-*
-    app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
-    app_code_repository_display_name: eSIM Jenkins
-    app_code_repository_display_email: vfdo@ubiquedigital.com
-    app_code_repository_name: vfleap
-    app_code_repository_type: git
-    app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
-    artefact_version_prefix: B
-    initial_deployment_target: ape
-    workspace_clone_glob: 'LEAP/**'
-    js_app_file: vfleap.js
-    repo_language: nodejs
-    nodejs_version: 6.9.1
-    jobs:
-      - '{name}-checkout-code-branches'
-      - '{name}-checkout-platform-code'
-      - '{name}-build-artefact'
-      - '{name}-provision-{environment}':
-            environment: ape
-      - '{name}-configure-{environment}':
-            environment: ape
-            playbook: test.yml
-      - '{name}-deploy-to-{environment}':
-          environment: ape
-      - '{name}-test-{environment}':
-            environment: ape
-            next_environment: none
+#
+- project: ytytytttt
+#     name: esim-aws-branches
+#     disabled: false
+#     platform_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
+# #     platform_code_repository_display_name: eSIM Jenkins
+#     platform_code_repository_display_email: vfdo@ubiquedigital.com
+#     platform_code_repository_name: vfdo-esim-platform
+#     platform_code_repository_type: git
+#     platform_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfdo-esim-platform.git
+#     platform_code_repository_refspec: +refs/tags/*:refs/remotes/origin/tags/*
+#     platform_code_repository_branches: origin/tags/Release-*
+#     app_code_repository_credentials: 10b4587a-9464-4766-9207-be5f4a03dc00
+#     app_code_repository_display_name: eSIM Jenkins
+#     app_code_repository_display_email: vfdo@ubiquedigital.com
+#     app_code_repository_name: vfleap
+#     app_code_repository_type: git
+#     app_code_repository_uri: ssh://git@platform.devops.vodafone.com:7999/vfleap/vfleap_repository.git
+#     artefact_version_prefix: B
+#     initial_deployment_target: ape
+#     workspace_clone_glob: 'LEAP/**'
+#     js_app_file: vfleap.js
+#     repo_language: nodejs
+#     nodejs_version: 6.9.1
+#     jobs:
+#       - '{name}-checkout-code-branches'
+#       - '{name}-checkout-platform-code'
+#       - '{name}-build-artefact'
+#       - '{name}-provision-{environment}':
+#             environment: ape
+#       - '{name}-configure-{environment}':
+#             environment: ape
+#             playbook: test.yml
+#       - '{name}-deploy-to-{environment}':
+#           environment: ape
+#       - '{name}-test-{environment}':
+#             environment: ape
+#             next_environment: none

@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-test-{environment}'
+    name: '{name}-build-application-artefact'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -14,10 +14,6 @@
           default: ""
           description: "The git branch of the VFLEAP repository"
       - string:
-          name: ARTEFACT_VERSION
-          default: ""
-          description: "The artefact version to deploy"
-      - string:
           name: PLATFORM_RELEASE_COMMIT_ID
           default: ""
           description: "The git commit of the latest release in the vfdo-esim-platform repository."
@@ -29,20 +25,20 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Test {name} on {environment} environment'
+    display-name: '{name} build artefact'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
           num-to-keep: 100
       - delivery-pipeline:
-          stage: Test
-          task: Testing {environment}
-          description: {ARTEFACT_VERSION}
+          stage: Build
+          task: Build Artefact
       - inject:
           properties-content: |
-            ENVIRONMENT={environment}
-            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
+            ARTEFACT_VERSION={artefact_version_prefix}-${{PIPELINE_NUMBER}}-${{BUILD_NUMBER}}-${{APP_GIT_COMMIT}}
+            GIT_COMMIT=${{PLATFORM_RELEASE_COMMIT_ID}}
+            GIT_BRANCH=${{PLATFORM_RELEASE_BRANCH}}
     wrappers:
       - ansicolor
     scm:
@@ -60,17 +56,10 @@
             users:
                 - '{app_code_repository_credentials}'
     builders:
-        - shell: echo "Testing environment ${{ENVIRONMENT}}"
-      #  - shell: !include-raw-escape: test-artefact.sh
-        - shell: !include-raw-escape: test-environment.sh
+      - shell: !include-raw-escape: build-artefact.sh
     publishers:
       - pipeline:
-          project: '{name}-provision-{next_environment}'
+          #project: '{name}-provision-{initial_deployment_target}'
+          project: '{name}-{next}-{initial_deployment_target}'
           current-parameters: true
-      - html-publisher:
-         name: "{name} mocha coverage"
-         dir: '/home/jenkins/workspace/{name}-test-{environment}/vfleap_repository/LEAP_TEST/mochawesome-report/'
-         files: "mochawesome.html"
-         keep-all: true
-         allow-missing: true
-         link-to-last-build: true
+          predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}

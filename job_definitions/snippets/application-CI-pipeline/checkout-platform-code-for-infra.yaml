@@ -1,0 +1,53 @@
+---
+- job-template:
+    name: '{name}-checkout-infra-platform-code'
+    parameters:
+      - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Latest tagged platform code Checkout for {name}'
+    node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Build
+          task: Checkout Code
+    wrappers:
+      - ansicolor
+    scm:
+      - '{platform_code_repository_type}':
+          refspec: '{platform_code_repository_refspec}'
+          url: '{platform_code_repository_uri}'
+          branches:
+            - '{platform_code_repository_branches}'
+          credentials-id: '{platform_code_repository_credentials}'
+          git-config-name: '{platform_code_repository_display_name}'
+          git-config-email: '{platform_code_repository_display_email}'
+          timeout: 5
+    builders:
+      - shell: !include-raw-escape: utility-echo-git-plugin-environment-variables.sh
+      - shell: !include-raw-escape: utility-echo-current-parameters-environment-variables.sh
+    publishers:
+      - trigger-parameterized-builds:
+          - project:
+              - '{name}-infra-platform-code-unittest'
+            current-parameters: true
+            predefined-parameters: |
+              PLATFORM_RELEASE_COMMIT_ID=${{GIT_COMMIT}}
+              PLATFORM_RELEASE_BRANCH=${{GIT_BRANCH}}
+            condition: SUCCESS

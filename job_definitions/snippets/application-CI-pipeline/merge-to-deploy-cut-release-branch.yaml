@@ -1,0 +1,56 @@
+---
+- job-template:
+    name: '{name}-{next}-{environment}-branch'
+    parameters:
+      - string:
+          name: PIPELINE_NUMBER
+          default: ""
+          description: "The BUILD_NUMBER of first job in the pipeline"
+      - string:
+          name: APP_GIT_COMMIT
+          default: ""
+          description: "The git commit of the VFLEAP repository"
+      - string:
+          name: APP_GIT_BRANCH
+          default: ""
+          description: "The git branch of the VFLEAP repository"
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'Rebase on develop and create release branch for {name}'
+    node: '{name}'
+    properties:
+      - build-discarder:
+          days-to-keep: 365
+          num-to-keep: 100
+      - delivery-pipeline:
+          stage: Release
+          task: Rebase on MASTER
+    wrappers:
+      - ansicolor
+    scm:
+      - '{app_code_repository_type}':
+          refspec: '{app_code_repository_refspec}'
+          url: '{app_code_repository_uri}'
+          branches:
+            - '{app_code_repository_branches}'
+          credentials-id: '{app_code_repository_credentials}'
+          git-config-name: '{app_code_repository_display_name}'
+          git-config-email: '{app_code_repository_display_email}'
+          timeout: 5
+    builders:
+      - shell: echo "======= Rebase -- origin/master $GIT_BRANCH ======="
+      - shell: echo "======= Commit -- $GIT_COMMIT ======="
+      - shell: !include-raw-escape: cutrelease.sh
+      - shell: echo "======= Branch -- $GIT_BRANCH ======="
+    #  - shell: !include-raw-escape: tag_and_merge_release.sh
+      #- shell: git rebase origin/master
+    # publishers:
+    #   - trigger-parameterized-builds:
+    #       - project:
+    #           - '{name}-{repo_language}-eslint'
+    #         current-parameters: true
+    #         git-revision: true
+    #         condition: SUCCESS
+    #         node-label: '{name}'

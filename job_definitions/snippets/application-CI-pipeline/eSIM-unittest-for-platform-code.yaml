@@ -1,5 +1,5 @@
 - job-template:
-    name: '{name}-test-{environment}'
+    name: '{name}-infra-platform-code-unittest'
     parameters:
       - string:
           name: PIPELINE_NUMBER
@@ -14,10 +14,6 @@
           default: ""
           description: "The git branch of the VFLEAP repository"
       - string:
-          name: ARTEFACT_VERSION
-          default: ""
-          description: "The artefact version to deploy"
-      - string:
           name: PLATFORM_RELEASE_COMMIT_ID
           default: ""
           description: "The git commit of the latest release in the vfdo-esim-platform repository."
@@ -29,20 +25,15 @@
     defaults: global
     description: 'Do not edit this job through the web!'
     disabled: false
-    display-name: 'Test {name} on {environment} environment'
+    display-name: 'Unit Tests for platform code'
     node: '{name}'
     properties:
       - build-discarder:
           days-to-keep: 365
-          num-to-keep: 100
+          num-to-keep: 500
       - delivery-pipeline:
-          stage: Test
-          task: Testing {environment}
-          description: {ARTEFACT_VERSION}
-      - inject:
-          properties-content: |
-            ENVIRONMENT={environment}
-            ARTEFACT_VERSION={{ARTEFACT_VERSION}}
+          stage: Unit Tests for plateform code
+          task: Unit test for plateform code
     wrappers:
       - ansicolor
     scm:
@@ -55,22 +46,15 @@
           git-config-name: '{platform_code_repository_display_name}'
           git-config-email: '{platform_code_repository_display_email}'
           timeout: 5
-    wrappers:
-      - ssh-agent-credentials:
-            users:
-                - '{app_code_repository_credentials}'
     builders:
-        - shell: echo "Testing environment ${{ENVIRONMENT}}"
-      #  - shell: !include-raw-escape: test-artefact.sh
-        - shell: !include-raw-escape: test-environment.sh
+      - shell: echo "======= Using NodeJS version -- $NODEJS_VERSION ======="
+      - shell: echo "======= Commit -- $GIT_COMMIT ======="
+      - shell: echo "======= Branch -- $GIT_BRANCH ======="
+      - shell: !include-raw-escape: run-eSIM-unittest-for-plateform-code.sh
+
     publishers:
       - pipeline:
-          project: '{name}-provision-{next_environment}'
+          #project: '{name}-provision-{initial_deployment_target}'
+          project: '{name}-build-application-artefact'
           current-parameters: true
-      - html-publisher:
-         name: "{name} mocha coverage"
-         dir: '/home/jenkins/workspace/{name}-test-{environment}/vfleap_repository/LEAP_TEST/mochawesome-report/'
-         files: "mochawesome.html"
-         keep-all: true
-         allow-missing: true
-         link-to-last-build: true
+          predefined-parameters: ARTEFACT_VERSION=${{ARTEFACT_VERSION}}
